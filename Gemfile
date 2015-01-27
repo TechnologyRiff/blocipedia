@@ -26,6 +26,9 @@ gem 'devise'
 gem 'faker'
 gem 'bootstrap-sass'
 gem 'figaro'
+gem 'pundit'
+gem 'redcarpet'
+gem 'epic-editor-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
