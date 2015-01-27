@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'paperclip'
 gem 'devise'
 gem 'faker'
+gem 'bootstrap-sass'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
