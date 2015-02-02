@@ -6,6 +6,10 @@ class Wiki < ActiveRecord::Base
 
     validates :title, presence: true
 
+  def public?
+    !private
+  end
+
     private
       scope :publicly_viewable, -> { where(private: false) }
       scope :privately_viewable, -> { where(private: true) }

@@ -38,6 +38,11 @@ class WikisController < ApplicationController
     end
   end
 
+  def edit
+    @wiki = Wiki.find(params[:id])
+    p @wiki
+  end
+
     def destroy
       @wiki = Wiki.find(params[:wiki_id])
 

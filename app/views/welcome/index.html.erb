@@ -1,5 +1,7 @@
 <h1>Welcome</h1>
-
+<% unless current_user %>
+  <%= render partial: 'users/user' %>
+<% else %>
 <div="container">
   <div="row">
     <div="col-md-8 pull-left">
@@ -10,3 +12,4 @@
     </div>
   </div>
 </div>
+<% end %>
