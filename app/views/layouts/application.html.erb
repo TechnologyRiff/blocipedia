@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Wikis</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="container">
@@ -14,10 +14,16 @@
       <li><%= link_to "Contact", welcome_contact_path %></li>
         <div class="pull-right user-info">
            <% if current_user %>
-             Hello <%= current_user.name || current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: 'btn btn-default ' %><span class='glyphicon glyphicon-log-out'></span>
+               Hello <%= link_to (current_user.name || current_user.email), users_index_path %>! 
+                <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
+                  <span class='glyphicon glyphicon-user'></span>
+                <% end %>
+
+               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' %><span class='glyphicon glyphicon-log-out'></span>
            <% else %>
-             <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %><span class='glyphicon glyphicon-user'></span> or 
-             <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default" %><span class='glyphicon glyphicon-new'></span>
+             <%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %> or 
+             <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-default"  %><span class='glyphicon glyphicon-new'></span>
+             
            <% end %>
          </div>
     </ul>

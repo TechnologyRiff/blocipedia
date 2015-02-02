@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    (user.present? && (wiki.private? == false)) || (user.present? && (record.user == user || user.admin?)
+    (user.present? && (wiki.private? == false)) || (user.present? && (record.user == user || user.admin?))
   end
 
   def edit?
@@ -31,11 +31,11 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    update?
   end
 
   def scope
-    Pundit.policy_scope!(user, record.class)
+    record.class
   end
 
   class Scope

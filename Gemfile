@@ -25,10 +25,14 @@ gem 'paperclip'
 gem 'devise'
 gem 'faker'
 gem 'bootstrap-sass'
+
+gem 'bootswatch-rails', '~> 3.2.4'
 gem 'figaro'
 gem 'pundit'
 gem 'redcarpet'
 gem 'epic-editor-rails'
+gem 'will_paginate', '~> 3.0.5'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 

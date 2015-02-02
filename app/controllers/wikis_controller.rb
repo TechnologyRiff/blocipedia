@@ -1,7 +1,7 @@
 class WikisController < ApplicationController
   def index
     @wikis = Wiki.visible_to(current_user).paginate(page: params[:page], per_page: 10)
-    authorize @wikis
+   # authorize @wikis
   end
 
   def show
@@ -17,7 +17,6 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(wiki_params)
     authorize @wiki
-    @wiki = current_user.wikis.build( wiki_params)
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki

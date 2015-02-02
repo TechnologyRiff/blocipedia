@@ -1,4 +1,12 @@
-<h1>Welcome#index</h1>
+<h1>Welcome</h1>
 
-
-<h3><%= link_to "Public Wikis", wikis_path  %></h3>
+<div="container">
+  <div="row">
+    <div="col-md-8 pull-left">
+<h2><%= link_to "Public Wikis", wikis_path  %></h2>
+    </div>
+    <div="col-md-3 col-md-offset-1 pull-right">
+    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
