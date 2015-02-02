@@ -31,7 +31,7 @@ class WikisController < ApplicationController
 
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
-      redirect_to @wiki
+      redirect_to wikis_path
     else
       flash[:error] = "There was an error saving the wiki. Please try again."
       render :edit
@@ -40,17 +40,17 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    p @wiki
+    authorize @wiki
   end
 
     def destroy
-      @wiki = Wiki.find(params[:wiki_id])
+      @wiki = Wiki.find(params[:id])
 
       if @wiki.destroy
-        flash[:notice] = "\"#{title}\" was deleted successfully."
-        render :show
+        flash[:alert] = "\"#{@wiki.title}\" was deleted successfully."
+        redirect_to wikis_path
       else
-        flash[:erro] = "Wiki couldn't be deleted. Try again later."
+        flash[:error] = "Wiki couldn't be deleted. Try again later."
       end
     end
 

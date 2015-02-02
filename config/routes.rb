@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  get 'users/index'
+  get 'users/show'
 
   get 'welcome/about'
 
