@@ -3,10 +3,13 @@
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
-        <%= link_to wiki.title, wiki %>
+        <%= link_to (markdown wiki.title), wiki %>
       </h4>
-    </div>
-
-  </div>
+   
 <% end %>
+
 <%= will_paginate @wikis %>
+
+<%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+</div>
+</div>
