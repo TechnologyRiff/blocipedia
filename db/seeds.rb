@@ -22,7 +22,7 @@ users = User.all
 
 15.times do 
   Wiki.create!(
-    user: users.sample,
+    user:         users.sample,
     title:       Faker::Lorem.sentence,
     body:         Faker::Lorem.paragraph
     )

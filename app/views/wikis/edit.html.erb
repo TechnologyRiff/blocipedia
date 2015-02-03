@@ -1,16 +1,14 @@
 <ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li><a href="#">Wikis</a></li>
+  <li><% link_to :root %>Home</a></li>
+  <li><a href="../">Wikis</a></li>
   <li><a href="#"><%= @wiki.title %></a></li>
   <li class="active">Edit</li>
 </ol>
 <div class="container">
 <div class="row">
   <div class="col-md-8">
-    <h3>Hello</h3>
     <%= form_for @wiki do |f| %>
       <div class="form-group">
-        <%= @wiki.title %>
         <%= f.label :title %>
         <%= f.text_field :title, class: "form-control", placeholder: "New title for Wiki" %>
       </div>

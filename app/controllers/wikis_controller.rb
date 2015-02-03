@@ -10,7 +10,7 @@ class WikisController < ApplicationController
   end
 
   def new
-    @wiki = Wiki.new
+    @wiki = Wiki.new(wiki_params)
     authorize @wiki
   end
 

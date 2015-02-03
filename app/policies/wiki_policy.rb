@@ -11,7 +11,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && wiki.public?
+    user.present?
 
   end
 end
