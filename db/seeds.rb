@@ -57,5 +57,5 @@ standard_user.skip_confirmation!
 standard_user.save!
 
 puts "Seed finished"
-#puts "#{user.count} users created"
-#puts "#{wiki.count} wikis created"
+puts "#{User.count} users created"
+puts "#{Wiki.count} wikis created"

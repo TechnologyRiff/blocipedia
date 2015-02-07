@@ -1,7 +1,11 @@
 class WikisController < ApplicationController
+  before_action :authenticate_user!
+  require 'will_paginate/array'
+
   def index
-    @wikis = policy_scope(Wiki).paginate(page: params[:page], per_page: 10)
-   # authorize @wikis
+    #@wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
+    @wikis = policy_scope(Wiki)
+     #@wikis = policy_scope(Wiki).to_a.paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -16,6 +20,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(wiki_params)
+    @wiki.user = current_user
     authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki was saved."
