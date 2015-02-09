@@ -1,0 +1,14 @@
+<h1>Public Wikis</h1>
+  <% if @wiki %>
+<% @wikis.public?.each do |wiki| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to wiki.title, wiki %>
+      </h4>
+    </div>
+
+  </div>
+<% end %>
+<%= will_paginate @wikis %>
+<% end %>
