@@ -15,7 +15,14 @@
 
       <div class="form-group">
         <%= f.label :body %>
-        <%= f.text_area :body, rows: 8, class: "form-control" %>
+        <%= f.text_area :body, rows: 14, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <% unless current_user.standard? %>
+          <%= f.label :private, class: 'checkbox' do %>
+            <%= f.check_box :private %> Make Wiki private?
+          <% end %>
+        <% end %>
       </div>
 
       <div class="form-group">

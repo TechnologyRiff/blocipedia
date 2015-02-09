@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'paperclip'
 gem 'devise'
+gem 'devise_invitable', '~> 1.4.0'
 gem 'faker'
 gem 'bootstrap-sass'
 
