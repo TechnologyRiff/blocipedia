@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
 after_initialize :init
 
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :invitable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  has_many :wikis
 
   mount_uploader :avatar, AvatarUploader
 

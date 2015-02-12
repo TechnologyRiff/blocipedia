@@ -5,6 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# create collaboration seed to check that collaboration connection to wiki is working
+# validate that email is not the creator's email 
+
 #create user administrator
 require 'faker'
 
@@ -48,6 +52,14 @@ premium_user = User.new(
 premium_user.skip_confirmation!
 premium_user.save!
 
+15.times do 
+  Wiki.create!(
+    user:         premium_user,
+    title:       Faker::Lorem.sentence,
+    body:         Faker::Lorem.paragraph
+    )
+end
+
 standard_user = User.new(
   name:       'standard user',
   email:       'standard@example.com',
@@ -55,6 +67,13 @@ standard_user = User.new(
 )
 standard_user.skip_confirmation!
 standard_user.save!
+
+5.times do 
+collab = Collaboration.new(
+  user:     users.sample,
+  wiki:     premium_user.wikis.sample
+)
+end
 
 puts "Seed finished"
 puts "#{User.count} users created"

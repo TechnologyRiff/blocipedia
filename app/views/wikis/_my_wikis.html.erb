@@ -1,3 +1,27 @@
 <h1>My Wikis</h1>
 <p>Premium user should see: List of public and private wikis</p>
 <p>standard user should see: List of public wikis</p>
+<% current_user.wiki.each do |wiki| %>
+<h2><%= markdown wiki.title %></h2>
+<div class="row">
+  <div class="col-md-8">
+    <small>
+      <%# image_tag(@wiki.user.avatar.tiny.url) if @wiki.user.avatar? %>
+      submitted <%= time_ago_in_words(@wiki.created_at) %> ago by
+      <%= @wiki.user.name %>
+    </small>
+  <p><%= markdown @wiki.body %></p>
+  <p><% if private? %>
+  <%= "Wiki is private" %>
+  <% end %>
+  </div>
+  <div class="col-md-4">
+
+    <div "form-group">
+      <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+      <% if policy(@wiki).destroy? %>
+      <%= link_to "Delete Wiki", @wikis, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+      <% end %>
+    </div>
+  </div>
+</div>

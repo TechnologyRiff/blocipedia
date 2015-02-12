@@ -9,7 +9,11 @@
   <p><%= markdown @wiki.body %></p>
   </div>
   <div class="col-md-4">
-
+    <% unless current_user.standard? %>
+      <div "form-group">
+        <%= link_to "Invite", new_user_invitation_path %>
+      </div>
+    <% end %>
     <div "form-group">
       <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
       <% if policy(@wiki).destroy? %>

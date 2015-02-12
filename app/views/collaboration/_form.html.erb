@@ -1,10 +1,12 @@
+<% Unless user.standard? %>
 <p>Add collaborator to Wiki?</p>
 <p>Select collaborator</p>
   <div class="form-group">
-  <%= form_for user.each do |user| %>
+  <%= form_for user.each do |f| %>
     <%= f.user "#{user}.name" %>
     <%= f.check_box, class: 'form-control' do %>
     <%= f.label :collaborator, class: 'form-control' %> Add user as collaborator
     <% end %>
   <% end %>
 <p>Invite new collaborator</p>
+<% end %>
