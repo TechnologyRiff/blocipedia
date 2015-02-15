@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
   def index
+    @wikis = Wiki.all
+    #authorize @wiki
   end
 
   def about

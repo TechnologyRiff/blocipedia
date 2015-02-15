@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>"<%= @wiki.title %>" has been edited.</h1>
+      <small>
+        By **user
+      </small>
+    <p>
+      <%= link_to "View wiki", wiki_path(@wiki) %>
+    </p>
+  </body>
+</html>

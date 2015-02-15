@@ -36,7 +36,7 @@ class WikisController < ApplicationController
 
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
-      redirect_to wikis_path
+      redirect_to request.env["HTTP_REFERER"]
     else
       flash[:error] = "There was an error saving the wiki. Please try again."
       render :edit

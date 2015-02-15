@@ -1,40 +1,34 @@
 <div class="container">
   <div class="row">
     <h1>My Profile</h1>
-  </div>
-      <div class="row">
         <div class="col-md-6">
-        <h2>Name: <%= @user.name %></h2>
-        <h3><%= "Membership Level: #{current_user.role}" %></h3>
-      </div>
-      <% if @user.premium? %>
-        <div class="col-md-6 pull-right">
-          <h3>**Click here to downgrade your membership back to standard</h3>
+          <h4>Name: <%= @user.name %></h4>
+          <h4><%= "Membership Level: #{current_user.role}" %></h4>
         </div>
-      <% elsif @user.standard? %>
-        <div class="col-md-6 pull-right">
-            <h3>Would you like to upgrade to a premium membership?</h3>
-              <p>** instructions</p>
-        
+          <% if @user.premium? %>
+            <div class="col-md-6 pull-right">
+              <h4>**Click here to downgrade your membership back to standard</h4>
+            </div>
+          <% elsif @user.standard? %>
+            <div class="col-md-6 pull-right">
+              <h4>Would you like to upgrade to a premium membership?</h4>
+                <p>** instructions</p>
                 <form action="/charges" method="POST">
-                  
                   <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
                   </script>
                 </form>
-          </div>
-        </div>
-    <% end %>
-</div>
-<div class="container">
+            </div>
+          <% end %>
+      </div>
+    
   <div class="row">
-    <div class="col-md-4">
-        <h2>**My Wikis</h2>
+    <div class="col-md-4 pull-left">
         <%= render partial: 'wikis/my_wikis', locals: { user: current_user, wiki: @wikis } %>
     </div>
     <div class="col-md-4">
-        <h2>**Wikis I'm following</h2>
+        <%= render partial: 'wikis/private_wikis', locals: { user: current_user, wiki: @wikis } %>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3 pull-right">
         <h2>**Users I'm following</h2>
     </div>
   </div>

@@ -1,14 +1,24 @@
 <div class="jumbotron">
-  <h1>Welcome</h1>
-      <div class="row">
-        <div class="col-md-6">
+  <div class="row">
+    <h1>Welcome</h1>
+      <% unless @user %>
+        <div class="col-md-4">
         <h2><%= link_to "Sign up as Standard user", new_user_registration_path %></h2>
           <small>You will be able to create and edit public Wikis</small>
-              
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
         <h2><%= link_to "Sign up as a Premium user", 'devise/registrations/new' %> </h2>
           <small>In addition to creating and editing public Wikis, you will be able to create private Wikis and invite collaborators</small>
         </div>
-      </div>
-    </div>
+  </div>
+      <% end %>
+      <% if @user && @user.standard? %>
+  <div class="row"> 
+    <h4>Would you like to upgrade to a premium membership?</h4>
+      <form action="/charges" method="POST">
+        <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+        </script>
+      </form>
+    <% end %>
+  </div>
+</div>

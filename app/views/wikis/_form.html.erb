@@ -24,7 +24,7 @@
     var editor = new EpicEditor().load();
     editor.getElement('editor').body.innerHTML = '<%= escape_javascript(@wiki.body) %>';
     function prep() {
-      $("#body")[0].value = (ediot.getElement('editor').body.innerHTML);
+      $("#body")[0].value = (edit.getElement('editor').body.innerHTML);
     }
   </script>
   <% end %>

@@ -52,7 +52,7 @@ premium_user = User.new(
 premium_user.skip_confirmation!
 premium_user.save!
 
-15.times do 
+10.times do 
   Wiki.create!(
     user:         premium_user,
     title:       Faker::Lorem.sentence,
@@ -67,6 +67,15 @@ standard_user = User.new(
 )
 standard_user.skip_confirmation!
 standard_user.save!
+
+10.times do
+  Wiki.create!(
+    user:         standard_user,
+    title:        Faker::Lorem.sentence,
+    body:         Faker::Lorem.paragraph
+    )
+end
+
 
 5.times do 
 collab = Collaboration.new(

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :wikis
 
+  resources :favorites, only: [:create, :destroy]
+  
   resources :charges, only: [:new, :create]
 
   devise_for :users

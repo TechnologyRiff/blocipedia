@@ -1,15 +1,14 @@
-<h1>Welcome</h1>
 <% unless current_user %>
   <%= render partial: 'users/user' %>
 <% else %>
 <div class="container">
   <div class="row">
     <div class="col-md-6 pull-left">
-<h2><%= link_to "Public Wikis", wikis_path  %></h2>
-    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+      <%= render partial: 'wikis/public_wikis' %>
+        <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
     </div>
     <div class="col-md-6 pull-right">
-    <h2>**Popular Wikis</h2>
+    <h2><%#= wiki.most_favorite %></h2>
     </div>
   </div>
 </div>

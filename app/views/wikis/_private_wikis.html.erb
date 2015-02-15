@@ -1,0 +1,18 @@
+      <% if @wiki && user.not_standard? %>
+      <h1>My Private Wikis</h1>
+      <% @wikis.private?.each do |wiki| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to wiki.title, wiki %>
+            </h4>
+          </div>
+        </div>
+      <% end %>
+      <%= will_paginate @wikis %>
+    <% elsif user.standard? %>
+      <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>
+    <% else %>
+      <p>You do not have any private wikis. Would you like to create one?</p>
+      <%= link_to "New Private Wiki", new_wiki_path, class: 'btn btn-primary' %>
+    <% end %>
