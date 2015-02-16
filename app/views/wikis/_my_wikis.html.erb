@@ -23,7 +23,7 @@
               <%= f.check_box :private %> Make private?
               <% end %>
             </div>
-        <% elsif wiki.public? && current_user.standard? %>
+      <% elsif wiki.public? && current_user.standard? %>
           <p>Public Wiki</p>
         <% end %>
     <div class="form-group">

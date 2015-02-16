@@ -1,4 +1,10 @@
-<h1><%= markdown @wiki.title %></h1>
+<div class="row">
+  <div class="col-md-8">
+    <h1><%= markdown @wiki.title %></h1>
+  </div>
+  <div class="col-md-4">
+  </div>
+</div>
 <div class="row">
   <div class="col-md-8">
     <small>
@@ -6,25 +12,35 @@
       submitted <%= time_ago_in_words(@wiki.created_at) %> ago by
       <%= @wiki.user.name %>
     </small>
-  <p><%= markdown @wiki.body %></p>
-  <p><%= @wiki.private? %></p>
-      <%#= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
+    <p><%= markdown @wiki.body %></p>
+      <% if @wiki.private? %>
+        <p>Private Wiki</p>
+      <% else %>
+        <p>Public Wiki</p>
+      <% end %>
+        <%#= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
+
+        <div "form-group">
+          <% if policy(@wiki).destroy? %>
+            <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+            <%= link_to "Delete Wiki", @wikis, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+          <% end %>
+        </div>
+         
   </div>
   <div class="col-md-4">
     <% unless current_user.standard? %>
-    <%= render partial: 'collaboration/form', locals: {wiki: @wiki } %>
-      <div "form-group">
-        <%= link_to "Invite", new_user_invitation_path %>
-      </div>
+      <%= render partial: 'collaborations/form', locals: {wiki: @wiki } %>
     <% end %>
-    <div "form-group">
-      <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-      <% if policy(@wiki).destroy? %>
-      <%= link_to "Delete Wiki", @wikis, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
-      <% end %>
-    </div>
-  </div>
-  <div class="col-md-4">
+      <h3>Current Collaborators</h3>
+        <% @wiki.collaborations.each do |collab| %>
+          <div><%= collab.user.name || collab.user.email %>
+          </div>
+        <% end %>
     
   </div>
 </div>
+
+
+
+

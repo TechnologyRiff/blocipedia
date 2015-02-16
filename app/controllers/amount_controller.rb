@@ -1,2 +1,0 @@
-class AmountController < ApplicationController
-end

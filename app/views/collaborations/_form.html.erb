@@ -1,0 +1,16 @@
+  <p>Add collaborator to Wiki?</p>
+    <div class="form-group">
+      <%= form_tag('/collaborations', method: :post) do %>
+        <%= hidden_field_tag :wiki_id, @wiki.id %>
+        <%= text_field_tag :email %>
+        <%= submit_tag "Invite", :name => nil %>
+      <% end %>
+    </div>
+
+
+
+
+<%#= form_tag topics_path, method: :get do %>
+          <%#= text_field_tag :search, params[:search] %>
+          <%#= submit_tag "Search", :name => nil %>
+      <%# end %>
