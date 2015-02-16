@@ -35,6 +35,12 @@ after_initialize :init
     follow.where(user_id: user.id).first
   end
 
+  def favorited_wikis
+    favorites = Favorite.where(user_id: @user.id)
+    favorited_wikis = Wiki.where(id: favorites.pluck(:wiki_id))
+    authorize @wiki
+  end
+  
   def favorited(user, wiki)
     favorites.where(user_id: user.id, wiki_id: wiki.id).first
   end

@@ -26,7 +26,13 @@
         </div>
 
         <div class="form-group">
-          <%= f.submit "Sign up", class: 'btn btn-success' %>
+          <%= f.submit "Sign up as Standard user", class: 'btn btn-success' %>
+        </div>
+        <div class="form-group">
+        <form action="/charges" method="POST">
+            
+        <%= f.submit "Sign up as Premium user", class: 'btn btn-primary' %> 
+        </form>
         </div>
 
         <div class="form-group">

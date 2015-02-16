@@ -8,10 +8,11 @@
     </small>
   <p><%= markdown @wiki.body %></p>
   <p><%= @wiki.private? %></p>
-      <%= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
+      <%#= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
   </div>
   <div class="col-md-4">
     <% unless current_user.standard? %>
+    <%= render partial: 'collaboration/form', locals: {wiki: @wiki } %>
       <div "form-group">
         <%= link_to "Invite", new_user_invitation_path %>
       </div>
@@ -24,11 +25,6 @@
     </div>
   </div>
   <div class="col-md-4">
-    <% if @wiki %>  <%#wiki.favorited? %>
-      <% @wikis.each do |wiki| %>
-      <h4><%= markdown wiki.title %></h4>
-        <%# @wiki.popular %>
-      <% end %>
-    <% end %>
+    
   </div>
 </div>

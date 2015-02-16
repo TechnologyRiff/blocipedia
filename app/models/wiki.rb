@@ -17,9 +17,13 @@ class Wiki < ActiveRecord::Base
     favorites.where(wiki_id: wiki.id).first
   end
 
-  def favorite?
-    wiki.favorited
+  def favorited_by_user
+    favorites = Favorite.where(wiki_id: @wiki.id)
+    favorited_by_user = User.where(id: favorites.pluck(:user_id))
+    favorited_by_user
   end
+  
+
 
   def self.popular
     self.select('wikis.*')

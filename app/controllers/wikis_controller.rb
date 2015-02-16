@@ -5,6 +5,7 @@ class WikisController < ApplicationController
   def index
     #@wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
     @wikis = policy_scope(Wiki)
+    users = User.all
      #@wikis = policy_scope(Wiki).to_a.paginate(page: params[:page], per_page: 10)
   end
 
