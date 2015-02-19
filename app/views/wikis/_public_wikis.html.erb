@@ -3,11 +3,10 @@
 <% @wikis.each do |wiki| %>
   <div class="media">
     <div class="media-body">
-      <h4 class="media-heading">
-        <%= link_to wiki.title, wiki %>
-      </h4>
+      <h3 class="media-heading">
+        <%= link_to wiki.title, wiki %></h3>
+        <small><%= truncate(wiki.body, length: 180, separator: '.') %></small>
     </div>
-
   </div>
 <% end %>
 <%#= will_paginate @wikis %>

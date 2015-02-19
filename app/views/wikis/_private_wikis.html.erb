@@ -5,6 +5,7 @@
           <div class="media-body">
             <h4 class="media-heading">
               <%= link_to wiki.title, wiki %>
+              <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
             </h4>
           </div>
         </div>

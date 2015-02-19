@@ -3,13 +3,13 @@
       <% current_user.wikis.each do |wiki| %>
           <% if favorite = favorited(@user.id, @wiki.id) %>
         
-              <h4><%= markdown wiki.title %></h4>
+              <h4><%= link_to markdown wiki.title, wiki %></h4>
                   <small>
                     <%# image_tag(@wiki.user.avatar.tiny.url) if @wiki.user.avatar? %>
                     submitted <%= time_ago_in_words(wiki.created_at) %> ago by
                     <%= wiki.user.name %>
                   </small>
-              <p><%= markdown wiki.body %></p>
+              <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
                   <%= link_to favorite_path, class: 'btn btn-danger', method: :delete do %>
                   <i class="glyphicon glyphicon-star-empty"> </i>nbsp; Unfavorite
                   <% end %>
@@ -33,7 +33,6 @@
                   </div>
               <% end %>
           <% end %>
-
 
     <div class="form-group">
       <% if policy(wiki).update? %>

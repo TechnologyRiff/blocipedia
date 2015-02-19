@@ -13,6 +13,7 @@
           <div class="media-body">
               <h4 class="media-heading">
                  <%= link_to (markdown wiki.title), wiki %>
+                 <small><%= truncate(wiki.body, length: 180, separator: '.') %></small>
               </h4>
           </div>
         </div>

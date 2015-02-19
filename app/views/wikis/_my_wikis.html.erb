@@ -1,12 +1,12 @@
 <h2>My Wikis</h2>
 <% current_user.wikis.each do |wiki| %>
-  <h4><%= markdown wiki.title %></h4>
+  <h4><%= link_to (markdown wiki.title), wiki %></h4>
     <small>
       <%# image_tag(@wiki.user.avatar.tiny.url) if @wiki.user.avatar? %>
       submitted <%= time_ago_in_words(wiki.created_at) %> ago by
       <%= wiki.user.name %>
     </small>
-    <p><%= markdown wiki.body %></p>
+    <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
 
     <%= form_for wiki do |f| %>
       <% if wiki.private? && current_user.not_standard? %>

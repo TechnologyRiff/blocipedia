@@ -11,6 +11,10 @@ after_initialize :init
 
   mount_uploader :avatar, AvatarUploader
 
+  def init
+    self.role ||= 'standard' if self.has_attribute? :role
+  end
+
   def admin?
     role == 'admin'
   end
@@ -27,8 +31,37 @@ after_initialize :init
     role == 'premium' || role == 'admin'
   end
 
-  def init
-    self.role ||= 'standard' if self.has_attribute? :role
+  def admin(user)
+    if user.role == 'admin'
+      user
+    end
+  end
+
+  def premium(user)
+    if user.role == 'premium'
+      user
+    end
+  end
+
+  def standard(user)
+    if user.role == 'standard'
+      user
+    end
+  end
+
+  def downgrade
+    self.role = 'standard'
+    self.save
+  end
+
+  def upgrade
+    self.role = 'premium'
+    self.save
+  end
+
+  def make_admin
+    self.role = 'admin'
+    self.save
   end
 
   def follow(user)
@@ -36,7 +69,7 @@ after_initialize :init
   end
 
   def favorited_wikis
-    favorites = Favorite.where(user_id: @user.id)
+k    favorites = Favorite.where(user_id: @user.id)
     favorited_wikis = Wiki.where(id: favorites.pluck(:wiki_id))
     authorize @wiki
   end
@@ -45,16 +78,20 @@ after_initialize :init
     favorites.where(user_id: user.id, wiki_id: wiki.id).first
   end
 
-  def self.top_writers
+  def self.most_followed
     self.select('users.*')
-      .select('COUNT(DISTINCT wikis.id) AS rank')
+      .select('COUNT(DISTINCT follow.id) AS rank')
       .group('users.id')
       .order('rank DESC')
   end
 
-  def self.most_followed
+  def self.search(search)
+    where('name like ?', "%#{search}%")
+  end
+
+  def self.top_writers
     self.select('users.*')
-      .select('COUNT(DISTINCT follow.id) AS rank')
+      .select('COUNT(DISTINCT wikis.id) AS rank')
       .group('users.id')
       .order('rank DESC')
   end
