@@ -6,37 +6,29 @@
       submitted <%= time_ago_in_words(wiki.created_at) %> ago by
       <%= wiki.user.name %>
     </small>
-    <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+    <p><%= truncate(wiki.body, length: 60, separator: '.') %></p>
 
     <%= form_for wiki do |f| %>
       <% if wiki.private? && current_user.not_standard? %>
           <p>Private Wiki</p>
           <div class="form-group">
               <%= f.label :private, class: 'checkbox' do %>
-              <%= f.check_box :private %> Private
+                <%= f.check_box :private %> <%= f.submit "Update Privacy", class: 'btn btn-default btn-sm' %>
               <% end %>
-              
+          </div>
       <% elsif wiki.public? && current_user.not_standard? %>
-         
             <div class="form-group">
               <%= f.label :private, class: 'checkbox' do %>
-              <%= f.check_box :private %> Make private?
+                <%= f.check_box :private %> <%= f.submit "Update Privacy", class: 'btn btn-default btn-sm' %>
               <% end %>
             </div>
       <% elsif wiki.public? && current_user.standard? %>
           <p>Public Wiki</p>
-        <% end %>
-    <div class="form-group">
-    <%= f.submit "Update", class: 'btn btn-success btn-sm' %>
-    <% end %>
-    </div>
-
-    <div class="form-group">
+      <% end %>
 
       <%= link_to "Edit", edit_wiki_path(wiki.id), class: 'btn btn-success btn-sm' %>
       <% if policy(wiki).destroy? %>
       <%= link_to "Delete", @wikis, method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: 'Are you sure you want to delete this topic?' } %>
       <% end %>
-    </div>
+  <% end %>
 <% end %>
-<br />

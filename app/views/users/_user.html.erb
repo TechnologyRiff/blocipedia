@@ -5,8 +5,8 @@
       <h2>Welcome</h2>
       <h4>You currently have a standard membership. Would you like to upgrade to a premium membership?</h4>
         <form action="/charges" method="POST">
-          <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
-          </script>
+          // <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+          // </script>
         </form>
     <% elsif current_user.not_standard? %>
       <%= link_to "View Profile", user_path(current_user) %> 

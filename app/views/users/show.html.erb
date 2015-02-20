@@ -4,13 +4,8 @@
         <div class="col-md-6 no-padding">
           <h4>Name: <%= current_user.name %></h4>
           <h4><%= "Membership Level: #{current_user.role.capitalize}" %></h4>
-        </div>
-        
-          <div class="col-md-6 pull-right no-padding">
              <%= render partial: 'users/manage_users', user: current_user %>
-          </div>
         <% if current_user.premium? %>
-          <div class="col-md-6 pull-right no-padding">
             <%= link_to "Downgrade Membership", user_downgrade_path(current_user), { data: { confirm: "Are you sure you want to become a standard user?" }, method: :post, class: "btn btn-default" } %>
           </div>
         <% elsif current_user.standard? %>

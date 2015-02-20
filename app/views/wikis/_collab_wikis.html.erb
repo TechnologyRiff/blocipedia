@@ -1,6 +1,6 @@
 <% if @wiki && current_user %>
   <h1>Collaborating Wikis</h1>
-    <% Collaboration.where(user_id: current_user.id).pluck(:wiki_id).each do |wiki| %>
+    <% @wiki.collaborations.each do |wiki| %>
       <div class="media">
         <div class="media-body">
           <h4 class="media-heading">

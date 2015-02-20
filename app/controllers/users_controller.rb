@@ -12,8 +12,8 @@ class UsersController < ApplicationController
      @stripe_btn_data = {
       key: Rails.configuration.stripe[:publishable_key],
       description: "Premium Membership - #{current_user.name}",
-      amount: 2000
-    }
+      amount: Amount.default
+      }
   end
 
   def update

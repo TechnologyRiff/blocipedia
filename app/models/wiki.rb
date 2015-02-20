@@ -13,9 +13,14 @@ class Wiki < ActiveRecord::Base
     !private
   end
 
-  def self.collab
+  def collaborations
+    Wiki.where(wiki_id: id )
   end
 
+  def collab_user
+    collaborations.users
+  end
+  
   def favorited(wiki)
     favorites.where(wiki_id: wiki.id).first
   end
