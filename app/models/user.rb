@@ -31,24 +31,6 @@ after_initialize :init
     role == 'premium' || role == 'admin'
   end
 
-  def admin(user)
-    if user.role == 'admin'
-      user
-    end
-  end
-
-  def premium(user)
-    if user.role == 'premium'
-      user
-    end
-  end
-
-  def standard(user)
-    if user.role == 'standard'
-      user
-    end
-  end
-
   def downgrade
     self.role = 'standard'
     self.save
@@ -69,7 +51,7 @@ after_initialize :init
   end
 
   def favorited_wikis
-k    favorites = Favorite.where(user_id: @user.id)
+k   favorites = Favorite.where(user_id: @user.id)
     favorited_wikis = Wiki.where(id: favorites.pluck(:wiki_id))
     authorize @wiki
   end

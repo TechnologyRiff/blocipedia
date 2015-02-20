@@ -4,7 +4,6 @@ class InvitationsController < Devise::InvitationsController
   end
 
   def create
-     
   end
   
 end

@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20150215215756) do
 
-  create_table "amounts",   force: true do |t|
-    t.integer   "amount",   default: "1500"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
     t.integer  "wiki_id"

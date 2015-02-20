@@ -5,12 +5,15 @@ class Wiki < ActiveRecord::Base
 
   #after_update :send_favorite_emails
 
-    scope :visible_to, -> (user) { user ? all : publicly_viewable }
+    #scope :visible_to, -> (user) { user ? all : publicly_viewable }
 
     validates :title, presence: true
 
   def public?
     !private
+  end
+
+  def self.collab
   end
 
   def favorited(wiki)

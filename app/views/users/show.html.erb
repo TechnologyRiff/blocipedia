@@ -31,7 +31,7 @@
         <%= render partial: 'wikis/private_wikis', locals: { user: current_user, wiki: @wikis } %>
     </div>
     <div class="col-md-3 pull-right no-padding">
-        <h2>**Users I'm following</h2>
+        <%= render partial: 'wikis/collab_wikis', locals: { user: current_user, wiki: @wiki} %>
     </div>
   </div>
 </div>

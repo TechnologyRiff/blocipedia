@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  
   def index
     @wikis = Wiki.all
     #authorize @wiki
@@ -8,6 +9,6 @@ class WelcomeController < ApplicationController
   end
 
   def contact
-
   end
+
 end
