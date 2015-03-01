@@ -2,12 +2,17 @@ Rails.application.routes.draw do
 
   resources :wikis
 
+  resources :favorites, only: [:create, :destroy]
+  
   resources :charges, only: [:new, :create]
 
   devise_for :users
-    resources :users, only: [:show]
+  resources :users, only: [:show] do 
+    post 'downgrade'
+  end
   
- 
+  resources :collaborations, only: [:create, :destroy]
+
 
   get 'welcome/about'
 

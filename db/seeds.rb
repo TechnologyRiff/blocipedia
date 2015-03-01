@@ -12,7 +12,7 @@
 #create user administrator
 require 'faker'
 
-5.times do
+2.times do
   user = User.new(
     name:     Faker::Name.name,
     email:    Faker::Internet.email,
@@ -24,7 +24,7 @@ end
 
 users = User.all
 
-15.times do 
+5.times do 
   Wiki.create!(
     user:         users.sample,
     title:       Faker::Lorem.sentence,
@@ -52,11 +52,12 @@ premium_user = User.new(
 premium_user.skip_confirmation!
 premium_user.save!
 
-15.times do 
+10.times do 
   Wiki.create!(
     user:         premium_user,
     title:       Faker::Lorem.sentence,
-    body:         Faker::Lorem.paragraph
+    body:         Faker::Lorem.paragraph,
+    private:      'true'
     )
 end
 
@@ -68,13 +69,29 @@ standard_user = User.new(
 standard_user.skip_confirmation!
 standard_user.save!
 
+3.times do
+  Wiki.create!(
+    user:         standard_user,
+    title:        Faker::Lorem.sentence,
+    body:         Faker::Lorem.paragraph
+    )
+end
+
 5.times do 
-collab = Collaboration.new(
-  user:     users.sample,
-  wiki:     premium_user.wikis.sample
+  Collaboration.create!(
+    user:     users.sample,
+    wiki:     premium_user.wikis.sample
 )
+end
+
+5.times do
+  Collaboration.create!(
+    user:   premium_user,
+    wiki:   wikis.sample
+    )
 end
 
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
+puts "#{Collaboration.count} collaborations created"

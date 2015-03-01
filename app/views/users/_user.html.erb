@@ -1,14 +1,18 @@
-<div class="jumbotron">
-  <h1>Welcome</h1>
-      <div class="row">
-        <div class="col-md-6">
-        <h2><%= link_to "Sign up as Standard user", new_user_registration_path %></h2>
-          <small>You will be able to create and edit public Wikis</small>
-              
-        </div>
-        <div class="col-md-6">
-        <h2><%= link_to "Sign up as a Premium user", 'devise/registrations/new' %> </h2>
-          <small>In addition to creating and editing public Wikis, you will be able to create private Wikis and invite collaborators</small>
-        </div>
-      </div>
-    </div>
+<div class="row no-margin">
+  <% if current_user %>
+
+    <% if current_user.standard? %>
+      <h2>Welcome</h2>
+      <h4>You currently have a standard membership. Would you like to upgrade to a premium membership?</h4>
+        <form action="/charges" method="POST">
+          // <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+          // </script>
+        </form>
+    <% elsif current_user.not_standard? %>
+      <%= link_to "View Profile", user_path(current_user) %> 
+    <% end %>
+
+  <% else %>
+    <h1><%= link_to "Create an Account", new_user_registration_path %><small> or <%= link_to "Sign In", new_user_session_path %></small></h1>
+  <% end %>
+</div>

@@ -1,0 +1,18 @@
+<% if @wiki && current_user %>
+  <h1>Collaborating Wikis</h1>
+    <% @wiki.collaborations.each do |wiki| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to wiki.title, wiki %>
+            <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+          </h4>
+          </div>
+      </div>
+    <% end %>
+      <%= will_paginate @wikis %>
+<% elsif current_user %>
+  <p>You are not collaborating on any wikis.</p> 
+<% else %>
+ 
+<% end %>

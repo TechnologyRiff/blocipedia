@@ -1,12 +1,29 @@
-<h1>Wikis</h1>
-<% @wikis.each do |wiki| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= link_to (markdown wiki.title), wiki %>
-      </h4>
-   </div>
+<div class="row">
+  <div class="col-md-6">
+  <h1>Wikis</h1>
+  </div>
+  <div class="col-md-6">
+  <h1>Favorite Wikis</h1>
+  </div>
 </div>
-<% end %>
+<div class="row">
+    <div class="col-md-6">
+      <% @wikis.each do |wiki| %>
+        <div class="media">
+          <div class="media-body">
+              <h4 class="media-heading">
+                 <%= link_to (markdown wiki.title), wiki %>
+                 <small><%= truncate(wiki.body, length: 180, separator: '.') %></small>
+              </h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <%#= render partial: 'wikis/favorite_wikis', locals: { wiki: @wiki } %>
+    </div>
+ 
+</div>
+
 <%# will_paginate @wikis %>
 <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>

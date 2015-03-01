@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   end
   
   def show
+    @persons = User.all
     @user = User.find(params[:id])
+    @role = @user.role
      @stripe_btn_data = {
       key: Rails.configuration.stripe[:publishable_key],
       description: "Premium Membership - #{current_user.name}",
-      amount: 2000
-    }
+      amount: Amount.default
+      }
   end
 
   def update
@@ -22,6 +24,11 @@ class UsersController < ApplicationController
       flash[:error] = "Invalid user information"
       redirect_to edit_user_registration_path
     end
+  end
+
+  def downgrade
+    current_user.downgrade
+    redirect_to current_user
   end
 
 private

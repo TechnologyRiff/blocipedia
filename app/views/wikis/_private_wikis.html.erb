@@ -1,0 +1,22 @@
+      <% if @wiki && current_user.not_standard? %>
+      <h1>My Private Wikis</h1>
+        <% Wiki.where("user_id = ? AND private = ?", params[:user_id], true).find_each do |wiki| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to wiki.title, wiki %>
+              <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+            </h4>
+          </div>
+        </div>
+        <% end %>
+      <%= will_paginate @wikis %>
+    <% elsif current_user && current_user.standard? %>
+      <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>
+    <% else %>
+   
+    <% end %>
+<!-- 
+User.where(weekly_subscriber: true).find_each do |user|
+Client.where("orders_count = ? AND locked = ?", params[:orders], false)
+ -->
