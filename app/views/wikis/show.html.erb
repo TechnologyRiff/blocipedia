@@ -33,7 +33,7 @@
                   </div>
               <% end %>
           <% end %>
-          <%#= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
+          <%= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
 
           <div "form-group">
             <% if policy(@wiki).destroy? %>
@@ -53,6 +53,7 @@
                 <% end %>
               <% else %>
                 <h4>There are currently no collaborators.</h4>
+                <%= link_to "Invite Collaborator", new_user_invitation_path, class: 'btn btn-primary btn-sm' %>
               <% end %>
           <% end %>
         <% else %>
