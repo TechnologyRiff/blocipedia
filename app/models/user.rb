@@ -7,7 +7,9 @@ after_initialize :init
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :wikis, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_wikis, through: :favorites, source: :wiki
   has_many :collaborations, dependent: :destroy
+
 
   mount_uploader :avatar, AvatarUploader
 
@@ -55,18 +57,12 @@ after_initialize :init
   end
 
 
-  def follow(user)
-    follow.where(user_id: user.id).first
-  end
-
-  def favorited_wikis
-k   favorites = Favorite.where(user_id: @user.id)
-    favorited_wikis = Wiki.where(id: favorites.pluck(:wiki_id))
-    authorize @wiki
+  def follow(person)
+    follow.where(user_id: person.id).take
   end
   
-  def favorited(user, wiki)
-    favorites.where(user_id: user.id, wiki_id: wiki.id).first
+  def favorited(wiki)
+    favorites.where(user_id: id, wiki_id: wiki.id).take
   end
 
   def self.most_followed

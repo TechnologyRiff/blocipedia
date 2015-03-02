@@ -1,9 +1,12 @@
-@import "bootswatch/yeti/variables";
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+@import "bootswatch/journal/variables";
 @import "bootstrap";
-@import "bootswatch/yeti/bootswatch";
+@import "bootswatch/journal/bootswatch";
+
+body { padding-top: 65px; }
 
 .nav {
-
   
 }
 
@@ -21,6 +24,10 @@
 
 .no-padding {
   padding: 0px;
+}
+
+.field-small {
+  width: 40%;
 }
 
 .no-margin {

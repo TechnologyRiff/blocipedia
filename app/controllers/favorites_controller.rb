@@ -4,12 +4,12 @@ class FavoritesController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @favorite = current_user.favorites.build(wiki: @wiki)
     authorize @favorite
-    if favorite.save
+    if @favorite.save
       flash[:notice] = "Favorite added."
-      redirect_to @wiki
+      redirect_to request.referer
     else
       flash[:notice] = "Problem creating favorite. Please try again later."
-      redirect_to @wiki
+      redirect_to :back
     end
   end
 
@@ -19,10 +19,10 @@ class FavoritesController < ApplicationController
     authorize @favorite
     if @favorite.destroy
       flash[:notice] = "Favorite was deleted"
-      redirect_to @wiki
+      redirect_to request.referer
     else
       flash[:notice] = "There was an error deleting your favorite. Please try again later."
-      redirect_to @wiki
+      redirect_to :back
     end
   end
 end

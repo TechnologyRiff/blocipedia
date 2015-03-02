@@ -7,45 +7,54 @@
     <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-    <ul class="nav nav-tabs">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
       <li><%= link_to "Home", root_path %></li>
       <li><%= link_to "About", welcome_about_path %></li>
-      <li><%# link_to "Contact", welcome_contact_path %></li>
-        <div class="pull-right user-info">
-          <div class="nav nav-tabs">
-           <% if current_user %>
-             <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
-               <li><%= link_to (current_user.name || current_user.email), user_path(current_user) %></li>
-                <li><%= link_to "Edit profile", edit_user_registration_path %></li>
-                <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-           <% else %>
-             <li><%= link_to "Sign In", new_user_session_path %></li> 
-             <li><%= link_to "Sign Up", new_user_registration_path %></li>
-           <% end %>
-         </div>
-        </div>
+      <li class="dropdown">
+          <a href="../wikis" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Wikis <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "My Wikis", wikis_path %></li>
+            <li><a href="#">Favorite Wikis</a></li>
+            <li><a href="#">Wiki Collaborations</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Collaborators</a></li>
+            <li><a href="#">Followed Users</a></li>
+          </ul>
+        </li>
     </ul>
-
-      <% if flash[:notice] %>
-        <div class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= flash[:notice] %>
-        </div>
-      <% elsif flash[:error] %>
-        <div class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:error] %>
-        </div>
-      <% elsif flash[:alert]%>
-        <div class="alert alert-warning">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:alert] %>
-        </div>
+    <ul class="nav navbar-nav pull-right user-info">
+      <% if current_user %>
+        <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
+        <li><%= link_to (current_user.name || current_user.email), user_path(current_user) %></li>
+        <li><%= link_to "Edit profile", edit_user_registration_path %></li>
+        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign In", new_user_session_path %></li> 
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
       <% end %>
+    </ul>
+  </div> 
+</nav>
 
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:error] %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:error] %>
+  </div>
+<% elsif flash[:alert]%>
+  <div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:alert] %>
+  </div>
+<% end %>
 
 <%= yield %>
-  </div>
 </body>
 </html>

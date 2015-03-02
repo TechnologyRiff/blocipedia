@@ -12,9 +12,11 @@
           <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
         <% end %>
     </div>
+
     <div class="col-md-4 no-padding">
         <%= render partial:'wikis/private_wikis', locals: { wiki: @wiki, user: current_user } %>
     </div>
+    
     <div class="col-md-4 no-padding"> 
       <%= render partial: 'wikis/collab_wikis', locals: { wiki: @wiki, user: current_user } %>
     </div>

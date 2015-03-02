@@ -14,19 +14,19 @@ class Wiki < ActiveRecord::Base
   end
 
   def collaborations
-    Wiki.where(wiki_id: id )
+    Wiki.where(wiki_id: id)
   end
 
   def collab_user
     collaborations.users
   end
   
-  def favorited(wiki)
-    favorites.where(wiki_id: wiki.id).first
+  def favorited(user)
+    favorites.where(wiki_id: id, user_id: user.id).take
   end
 
   def favorited_by_user
-    favorites = Favorite.where(wiki_id: @wiki.id)
+    favorites = Favorite.where(wiki_id: id)
     favorited_by_user = User.where(id: favorites.pluck(:user_id))
     favorited_by_user
   end

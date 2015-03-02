@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-  before_action :authenticate_user!, :except => [:show]
+  before_action :authenticate_user!, :except => [:index]
   require 'will_paginate/array'
 
   def index
@@ -11,6 +11,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @user = current_user
     authorize @wiki
   end
 
