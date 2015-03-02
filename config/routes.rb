@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :wikis
+  get 'wikis/public_wikis'
 
   resources :favorites, only: [:create, :destroy]
   
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   end
   
   resources :collaborations, only: [:create, :destroy]
-
 
   get 'welcome/about'
 

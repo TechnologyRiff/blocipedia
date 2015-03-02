@@ -1,4 +1,11 @@
 <div class="container">
+  <ol class="breadcrumb navbar-fixed-top" >
+    <li><%= link_to "Home", :root %></li>
+    <li><a href="../">Users</a></li>
+    <li class="active"><%= current_user.name || current_user.email %></a></li>
+  </ol>
+</div>
+<div class="container">
   <div class="row">
     <h1>My Profile</h1>
         <div class="col-md-6 no-padding">

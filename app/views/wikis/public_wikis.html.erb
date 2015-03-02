@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+  <li><% link_to :root %>Home</a></li>
+  <li><%= link_to "Wikis", wikis_path %></li>
+  <li class="active">Public Wikis</li>
+</ol>
+<div class="container">
+  <div class="row">
+    <% render partial: 'wikis/public_wikis', collection: @wikis %>
+  </div>
+</div>

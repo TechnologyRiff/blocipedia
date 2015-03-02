@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
   <li><% link_to :root %>Home</a></li>
-  <li><a href="../">Wikis</a></li>
-  <li><a href="#"><%= @wiki.title %></a></li>
+  <li><%= link_to "Wikis", wikis_path %></li>
+  <li><%= link_to "#{@wiki.title}", wiki_path(@wiki) %></li>
   <li class="active">Edit</li>
 </ol>
 <div class="container">
