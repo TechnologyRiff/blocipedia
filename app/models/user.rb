@@ -5,15 +5,9 @@ after_initialize :init
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  has_many :wikis, dependent: :destroy
-  has_many :favorites, dependent: :destroy
-  has_many :collaborations, dependent: :destroy
+  has_many :wikis
 
   mount_uploader :avatar, AvatarUploader
-
-  def init
-    self.role ||= 'standard' if self.has_attribute? :role
-  end
 
   def admin?
     role == 'admin'
@@ -27,60 +21,15 @@ after_initialize :init
     role == 'standard'
   end
 
-  def not_standard?
-    role == 'premium' || role == 'admin'
+  def init
+    self.role ||= 'standard' if self.has_attribute? :role
   end
 
-  def downgrade
-    self.role = 'standard'
-    self.save
+  def favorited(user)
+    favorites.where(user_id: user.id).first
   end
 
-  def upgrade
-    self.role = 'premium'
-    self.save
-  end
-
-  def make_admin
-    self.role = 'admin'
-    self.save
-  end
-
-  def collaborations
-    Collaboration.where(user_id: id)
-  end
-
-  def collab_wiki
-    collaborations.wikis
-  end
-
-
-  def follow(user)
-    follow.where(user_id: user.id).first
-  end
-
-  def favorited_wikis
-k   favorites = Favorite.where(user_id: @user.id)
-    favorited_wikis = Wiki.where(id: favorites.pluck(:wiki_id))
-    authorize @wiki
-  end
-  
-  def favorited(user, wiki)
-    favorites.where(user_id: user.id, wiki_id: wiki.id).first
-  end
-
-  def self.most_followed
-    self.select('users.*')
-      .select('COUNT(DISTINCT follow.id) AS rank')
-      .group('users.id')
-      .order('rank DESC')
-  end
-
-  def self.search(search)
-    where('name like ?', "%#{search}%")
-  end
-
-  def self.top_writers
+  def self.top_rated
     self.select('users.*')
       .select('COUNT(DISTINCT wikis.id) AS rank')
       .group('users.id')

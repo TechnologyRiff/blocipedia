@@ -1,32 +1,41 @@
 <div class="container">
   <div class="row">
     <h1>My Profile</h1>
-        <div class="col-md-6 no-padding">
-          <h4>Name: <%= current_user.name %></h4>
-          <h4><%= "Membership Level: #{current_user.role.capitalize}" %></h4>
-             <%= render partial: 'users/manage_users', user: current_user %>
-        <% if current_user.premium? %>
-            <%= link_to "Downgrade Membership", user_downgrade_path(current_user), { data: { confirm: "Are you sure you want to become a standard user?" }, method: :post, class: "btn btn-default" } %>
+  </div>
+      <div class="row">
+        <div class="col-md-6">
+        <h2>Name: <%= @user.name %></h2>
+        <h3><%= "Membership Level: #{current_user.role}" %></h3>
+      </div>
+      <% if @user.premium? %>
+        <div class="col-md-6 pull-right">
+          <h3>**Click here to downgrade your membership back to standard</h3>
+        </div>
+      <% elsif @user.standard? %>
+        <div class="col-md-6 pull-right">
+            <h3>Would you like to upgrade to a premium membership?</h3>
+              <p>** instructions</p>
+        
+                <form action="/charges" method="POST">
+                  
+                  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+                  </script>
+                </form>
           </div>
-        <% elsif current_user.standard? %>
-          <div class="col-md-6 pull-right no-padding">
-            <h4>Would you like to upgrade to a premium membership?</h4>
-              <form action="/charges" method="POST">
-                <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
-                </script>
-              </form>
-          </div>
-        <% end %>
-    
+        </div>
+    <% end %>
+</div>
+<div class="container">
   <div class="row">
-    <div class="col-md-4 pull-left no-padding">
+    <div class="col-md-4">
+        <h2>**My Wikis</h2>
         <%= render partial: 'wikis/my_wikis', locals: { user: current_user, wiki: @wikis } %>
     </div>
-    <div class="col-md-4 no-padding">
-        <%= render partial: 'wikis/private_wikis', locals: { user: current_user, wiki: @wikis } %>
+    <div class="col-md-4">
+        <h2>**Wikis I'm following</h2>
     </div>
-    <div class="col-md-3 pull-right no-padding">
-        <%= render partial: 'wikis/collab_wikis', locals: { user: current_user, wiki: @wiki} %>
+    <div class="col-md-4">
+        <h2>**Users I'm following</h2>
     </div>
   </div>
 </div>

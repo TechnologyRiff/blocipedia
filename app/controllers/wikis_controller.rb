@@ -1,11 +1,10 @@
 class WikisController < ApplicationController
-  before_action :authenticate_user!, :except => [:show]
+  before_action :authenticate_user!
   require 'will_paginate/array'
 
   def index
-    @wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
-    #@wikis = policy_scope(Wiki)
-    users = User.all
+    #@wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
+    @wikis = policy_scope(Wiki)
      #@wikis = policy_scope(Wiki).to_a.paginate(page: params[:page], per_page: 10)
   end
 
@@ -37,7 +36,7 @@ class WikisController < ApplicationController
 
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
-      redirect_to request.env["HTTP_REFERER"]
+      redirect_to wikis_path
     else
       flash[:error] = "There was an error saving the wiki. Please try again."
       render :edit
