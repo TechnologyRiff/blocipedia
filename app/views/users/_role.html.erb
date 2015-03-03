@@ -1,16 +1,12 @@
 <p>Change user's role?</p>
-    <div class="form-group">
-      <%= form_tag('/role', method: :post) do %>
-        <%= hidden_field_tag :person_id %>
-        
-      <% end %>
-
-
-      <%= radio_button_tag(:role, "Admin") %>
-      <%= label_tag(:role_admin, " Administrator     ") %>
-      <%= radio_button_tag(:role, "Premium") %>
-      <%= label_tag(:role_premium, " Premium     ") %>
-      <%= radio_button_tag(:role, "Standard") %>
-      <%= label_tag(:role_standard, " Standard") %>
-
-    </div>
+<div class="form-group">
+  <%= form_tag('/role', method: :post) do %>
+    <%= hidden_field_tag :person_id %>
+  <% end %>
+  <%= radio_button_tag(:role, "Admin") %>
+  <%= label_tag(:role_admin, " Administrator     ") %>
+  <%= radio_button_tag(:role, "Premium") %>
+  <%= label_tag(:role_premium, " Premium     ") %>
+  <%= radio_button_tag(:role, "Standard") %>
+  <%= label_tag(:role_standard, " Standard") %>
+</div>

@@ -2,38 +2,77 @@
   <li><%= link_to "Home", :root %></li>
   <li class="active">Wikis</li>
 </ol>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Wikis</h1><%= link_to "Public Wikis", wikis_public_wikis_path %> 
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          My Wikis
+        </a>
+      </h4>
     </div>
-
-    <div class="col-md-6">
-    <h1>Favorite Wikis</h1>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <%= render partial: 'wikis/my_wikis', locals: { wiki: @wiki } %>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <% @wikis.each do |wiki| %>
-        <div class="media">
-          <div class="media-body">
-              <h4 class="media-heading">
-                 <%= link_to (markdown wiki.title), wiki %>
-                 <small><%= truncate(wiki.body, length: 180, separator: '.') %></small>
-              </h4>
-          </div>
-        </div>
-      <% end %>
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          My Collaborations
+        </a>
+      </h4>
     </div>
-
-    <div class="col-md-6">
-      <%= render partial: 'wikis/favorite_wikis', locals: { wiki: @wiki } %>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <%= render partial: 'wikis/collab_wikis', locals: { wiki: @wiki } %>
+      </div>
     </div>
-
   </div>
-
-  <%# will_paginate @wikis %>
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          My Favorite Wikis
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <%= render partial: 'wikis/favorite_wikis', locals: { wiki: @wiki } %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+         All Public Wikis 
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+        <%= render partial: 'wikis/public_wikis', locals: { wiki: @wiki } %>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          Available Private Wikis 
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+        <%= render partial: 'wikis/private_wikis', locals: { wiki: @wiki } %>
+      </div>
+    </div>
+  </div>
+  <%#= will_paginate @wikis %>
   <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
 </div>

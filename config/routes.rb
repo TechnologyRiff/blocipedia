@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'wikis/public_wikis' 
+
   resources :wikis
-  get 'wikis/public_wikis'
 
   resources :favorites, only: [:create, :destroy]
   

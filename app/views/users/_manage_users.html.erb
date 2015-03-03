@@ -6,7 +6,7 @@
         </p>
 
         <div class="form-group">
-          <%#= form_tag('/role', method: :post) do %>
+          <%= form_tag('/role', method: :post) do %>
             <%= hidden_field_tag person.id %>
 
             <%= radio_button_tag(:role, "Admin") %>
@@ -15,7 +15,7 @@
             <%= label_tag(:role_premium, " Premium     ") %>
             <%= radio_button_tag(:role, "Standard") %>
             <%= label_tag(:role_standard, " Standard") %>
-          <%# end %>
+          <% end %>
           <%= select_tag :role %>
     <%= submit_tag "Update Role" %>
         </div>
@@ -26,9 +26,6 @@
         <%#= text_field_tag :search, params[:search] %>
         <%#= submit_tag "Search", :name => nil %>
     <%# end %>
-
-              <%#= link_to "Downgrade Membership", user_downgrade_path(current_user), { data: { confirm: "Are you sure you want to become a standard user?" }, method: :post, class: "btn btn-default" } %>
-
 <% else %>
   <h4>You do not have permission to manage users.</h4>
 <% end %>

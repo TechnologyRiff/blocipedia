@@ -26,9 +26,10 @@ class WikisController < ApplicationController
     authorize @wiki
     if @wiki.save
       flash[:notice] = "Wiki was saved."
-      redirect_to @wiki
+      redirect_to request.referer
     else 
       flash[:error] = "There was an error saving the post. Please try again."
+      redirect_to :back
     end
   end
 
@@ -38,10 +39,10 @@ class WikisController < ApplicationController
 
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
-      redirect_to request.env["HTTP_REFERER"]
+      redirect_to request.referer
     else
       flash[:error] = "There was an error saving the wiki. Please try again."
-      render :edit
+      redirect_to :back
     end
   end
 
@@ -55,9 +56,10 @@ class WikisController < ApplicationController
 
       if @wiki.destroy
         flash[:alert] = "\"#{@wiki.title}\" was deleted successfully."
-        redirect_to wikis_path
+        redirect_to request.referer
       else
         flash[:error] = "Wiki couldn't be deleted. Try again later."
+        redirect_to :back
       end
     end
 

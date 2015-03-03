@@ -1,10 +1,9 @@
+<h2>Public Wikis</h2>
 <% Wiki.where(private: false).find_each do |wiki| %>
   <div class="media">
-    <div class="media-body">
-      <h3 class="media-heading">
-        <%= link_to wiki.title, wiki %></h3>
-        <small><%= truncate(wiki.body, length: 180, separator: '.') %></small>
-    </div>
+    <h3><%= link_to wiki.title, wiki %></h3>
+    <small><%= truncate(wiki.body, length: 180, separator: '.') %>
+    </small>
   </div>
 <% end %>
 
