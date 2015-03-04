@@ -16,15 +16,52 @@ require 'faker'
   user = User.new(
     name:     Faker::Name.name,
     email:    Faker::Internet.email,
-    password:   Faker::Lorem.characters(10)
+    password:   Faker::Lorem.characters(10),
+    role:       "premium",
+    public:     'true'
     )
   user.skip_confirmation!
   user.save!
 end
 
+2.times do
+  user = User.new(
+    name:     Faker::Name.name,
+    email:    Faker::Internet.email,
+    password:   Faker::Lorem.characters(10),
+    role:       "premium",
+    public:     'false'
+    )
+  user.skip_confirmation!
+  user.save!
+end
+
+2.times do
+  user = User.new(
+    name:     Faker::Name.name,
+    email:    Faker::Internet.email,
+    password:   Faker::Lorem.characters(10),
+    role:       "standard",
+    public:     'true'
+    )
+  user.skip_confirmation!
+  user.save!
+end
+
+2.times do
+  user = User.new(
+    name:     Faker::Name.name,
+    email:    Faker::Internet.email,
+    password:   Faker::Lorem.characters(10),
+    role:       "standard",
+    public:     'false'
+    )
+  user.skip_confirmation!
+  user.save!
+end
 users = User.all
 
-5.times do 
+20.times do 
   Wiki.create!(
     user:         users.sample,
     title:       Faker::Lorem.sentence,
@@ -32,6 +69,14 @@ users = User.all
     )
 end
 wikis = Wiki.all 
+
+30.times do 
+  Favorite.create!(
+  user_id:    users.sample.id,
+  wiki_id:    wikis.sample.id
+  )
+end
+favorites = Favorite.all
 
 admin = User.new(
   name:     'Admin User',
@@ -46,13 +91,14 @@ premium_user = User.new(
   name:     'Premium',
   email:    'premium@example.com',
   password: 'helloworld',
-  role:     'premium'
+  role:     'premium',
+  public:   'true'
 
 )
 premium_user.skip_confirmation!
 premium_user.save!
 
-10.times do 
+5.times do 
   Wiki.create!(
     user:         premium_user,
     title:       Faker::Lorem.sentence,
@@ -64,7 +110,8 @@ end
 standard_user = User.new(
   name:       'standard user',
   email:       'standard@example.com',
-  password:     'helloworld'
+  password:     'helloworld',
+  public:       'true'
 )
 standard_user.skip_confirmation!
 standard_user.save!
@@ -77,14 +124,14 @@ standard_user.save!
     )
 end
 
-5.times do 
+15.times do 
   Collaboration.create!(
     user:     users.sample,
     wiki:     premium_user.wikis.sample
 )
 end
 
-5.times do
+20.times do
   Collaboration.create!(
     user:   premium_user,
     wiki:   wikis.sample
@@ -95,3 +142,4 @@ puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
 puts "#{Collaboration.count} collaborations created"
+puts "#{Favorite.count} favorites created"

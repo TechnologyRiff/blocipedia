@@ -1,19 +1,24 @@
 Rails.application.routes.draw do
 
-  get 'wikis/public_wikis' 
-
-  resources :wikis
+  resources :wikis do
+    member do 
+      put "auth"
+    end
+  end
 
   resources :favorites, only: [:create, :destroy]
   
   resources :charges, only: [:new, :create]
 
   devise_for :users
-  resources :users, only: [:show] do 
+  resources :users, only: [:index, :show] do 
     post 'downgrade'
+    put 'role'
   end
   
   resources :collaborations, only: [:create, :destroy]
+
+
 
   get 'welcome/about'
 

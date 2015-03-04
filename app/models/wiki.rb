@@ -2,10 +2,9 @@ class Wiki < ActiveRecord::Base
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :collaborations, dependent: :destroy
+  has_many :collab_users, through: :collaborations, source: :user
 
   #after_update :send_favorite_emails
-
-    #scope :visible_to, -> (user) { user ? all : publicly_viewable }
 
     validates :title, presence: true
 
@@ -20,6 +19,10 @@ class Wiki < ActiveRecord::Base
   def collab_user
     collaborations.users
   end
+
+  def self.include?(user)
+    collaborations.wikis.where(wiki_id: id, user_id: user.id).take
+  end
   
   def favorited(user)
     favorites.where(wiki_id: id, user_id: user.id).take
@@ -30,8 +33,6 @@ class Wiki < ActiveRecord::Base
     favorited_by_user = User.where(id: favorites.pluck(:user_id))
     favorited_by_user
   end
-  
-
 
   def self.popular
     self.select('wikis.*')
@@ -40,14 +41,12 @@ class Wiki < ActiveRecord::Base
       .order('rank DESC')
   end
 
-    private
+  private
 
-      def send_favorite_emails
-        wiki.favorites.each do |favorite|
-          FavoriteMailer.wiki_updated(favorite.user, wiki, self).deliver
-        end
-      end
-      
-      scope :publicly_viewable, -> { where(private: false) }
-      scope :privately_viewable, -> { where(private: true) }
+  def send_favorite_emails
+    wiki.favorites.each do |favorite|
+      FavoriteMailer.wiki_updated(favorite.user, wiki, self).deliver
+    end
+  end
+     
 end

@@ -1,0 +1,8 @@
+<h2>Popular Wikis</h2>
+<%= Wiki.popular %>
+  <h4><%#= link_to markdown wiki.title %></h4>
+    <small>
+      submitted <%#= time_ago_in_words(wiki.created_at) %> ago by
+      <%#= wiki.user.name %>
+    </small>
+  <p><%#= truncate(wiki.body, length: 180, separator: '.') %></p>

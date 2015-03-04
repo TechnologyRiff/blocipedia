@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  
   def index
-    @users = User.top_rated.paginate(page: params[:page], per_page: 10)
+    @users = User.all
+    @persons = @users
+    @user = current_user
   end
   
   def show
@@ -31,10 +33,20 @@ class UsersController < ApplicationController
     redirect_to current_user
   end
 
+  def role
+    @person = User.find(params[:user_id])
+    @person.role.save
+    redirect_to request.referer
+  end
+
 private
 
   def user_params
     params.require(:user).permit(:name, :avatar)
   end
  
+  def scope
+    scope :visible_to, -> (user) { user ? all : where(public: true) }
+  end 
+
 end

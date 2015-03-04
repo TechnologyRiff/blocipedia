@@ -3,10 +3,18 @@ class WikisController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    @wikis = Wiki.all.paginate(page: params[:page], per_page: 10)
-    #@wikis = policy_scope(Wiki)
-    users = User.all
-     #@wikis = policy_scope(Wiki).to_a.paginate(page: params[:page], per_page: 10)
+    @wikis = policy_scope(Wiki)
+  end
+
+  def auth
+    @wiki = Wiki.find(params[:id])
+    if @wiki.private?
+      @wiki.private = false
+    else
+      @wiki.private = true
+    end
+    @wiki.save
+    redirect_to request.referer
   end
 
   def show

@@ -1,25 +1,31 @@
 <div class="container">
-
-  <div class="row no-margin">
-      <%= render partial: 'users/user' %>
-  </div>
-
-  <div class="row no-margin">
-    <div class="col-md-4 no-padding pull-left">
-      <h2>Browse public wikis</h2>
+  <% if current_user %>
+    <div class="jumbotron">
+      <h1>Welcome</h1>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body center-align">
+          <h3><%= link_to "Browse Wikis", wikis_path %></h3>
+          <h3>&nbsp;</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body center-align">
+          <h3><%= link_to "Browse Users", users_path %>
+          <h3>&nbsp;</h3>
+        </div>
+      </div>
+    </div>    
+  <% else %>
+    <div class="row no-margin">
       <%= render partial: 'wikis/public_wikis', locals: { wiki: @wiki } %>
-      <% if current_user %>
-          <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
-        <% end %>
     </div>
-
-    <div class="col-md-4 no-padding">
-        <%= render partial:'wikis/private_wikis', locals: { wiki: @wiki, user: current_user } %>
-    </div>
-
-    <div class="col-md-4 no-padding"> 
-      <%= render partial: 'wikis/collab_wikis', locals: { wiki: @wiki, user: current_user } %>
-    </div>
-  </div>
-
+  <% end %>
 </div>

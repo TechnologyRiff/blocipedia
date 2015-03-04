@@ -1,20 +1,17 @@
 <h2>Private Wikis</h2>
-<% if current_user.not_standard? %>
-  <% Wiki.where("user_id = ? AND private = ?", params[:user_id], true).find_each do |wiki| %>
-    <div class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <%= link_to "#{wiki.title}", wiki %>
-          <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-        </h4>
-      </div>
+<% Wiki.where("user_id = ? AND private = ?", params[:user_id], true).find_each do |wiki| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to "#{wiki.title}", wiki %>
+        <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+      </h4>
     </div>
-  <% end %>
-<% elsif current_user.standard? %>
+  </div>
+<% end %>
+<% if current_user && current_user.standard? %>
   <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>
   <%= link_to "My Profile", user_path(current_user) %>
-<% else %>
-
 <% end %>
 <!-- 
 User.where(weekly_subscriber: true).find_each do |user|
