@@ -56,6 +56,9 @@ after_initialize :init
     collaborations.wikis
   end
 
+  def public?
+    public == 'true'
+  end
 
   def follow(person)
     follow.where(user_id: person.id).take

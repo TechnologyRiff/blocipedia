@@ -1,12 +1,8 @@
 <div class="row no-margin">
-  <% if current_user.standard? %>
-    <h2>Welcome</h2>
-    <h4>You currently have a standard membership. Would you like to upgrade to a premium membership?</h4>
-    <form action="/charges" method="POST">
-      <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
-      </script>
-    </form>
-  <% elsif current_user.not_standard? %>
-    <%= link_to "View Profile", user_path(current_user) %> 
+  <h4><%= "Name: #{current_user.name}" %></h4>
+  <h4><%= "Email: #{current_user.email}" %></h4>
+  <h4><%= "Membership Level: #{current_user.role.capitalize}" %></h4>
+  <% if current_user.avatar? %>
+    <h4>Current Avatar: <%= image_tag( current_user.avatar.profile.url ) %></h4>
   <% end %>
 </div>

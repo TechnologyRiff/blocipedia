@@ -1,0 +1,6 @@
+<% @persons.each do |person| %>
+  <% if person.public? %>
+    <%= "Name: #{person.name}" %>
+    <%= render partial: 'wikis/public_wikis', locals: { wiki: @wiki, user: person } %>
+  <% end %>
+<% end %>

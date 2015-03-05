@@ -35,13 +35,13 @@
     <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          User ?
+         Top Writers 
         </a>
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-        <%#= render partial: 'wikis/favorite_wikis', locals: { wiki: @wiki } %>
+        <%= render partial: 'users/top_writers', collection: @users %>
       </div>
     </div>
   </div>
@@ -49,13 +49,13 @@
     <div class="panel-heading" role="tab" id="headingFour">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-         User ? 
+          Public User Profiles
         </a>
       </h4>
     </div>
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
       <div class="panel-body">
-        <%#= render partial: 'wikis/public_wikis', locals: { wiki: @wiki } %>
+        <%= render partial: 'users/public_profiles', collection: @users %>
       </div>
     </div>
   </div>
