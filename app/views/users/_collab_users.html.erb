@@ -1,0 +1,16 @@
+<h1>Collaborating Users</h1>
+  <% current_user.collaborations.each do |person| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to @person %>
+            <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+          </h4>
+          </div>
+      </div>
+    <% end %>
+<% elsif current_user %>
+  <p>You are not collaborating on any wikis.</p> 
+<% else %>
+ 
+<% end %>

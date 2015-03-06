@@ -1,17 +1,13 @@
 <div class="row no-margin">
-  <% if current_user %>
-
-    <% if current_user.standard? %>
-      <h2>Welcome</h2>
-      <h4>You currently have a standard membership. Would you like to upgrade to a premium membership?</h4>
-      <form action="/charges" method="POST">
-        <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
-        </script>
-      </form>
-    <% elsif current_user.not_standard? %>
-      <%= link_to "View Profile", user_path(current_user) %> 
-    <% end %>
-
+  <% if current_user.standard? %>
+    <h2>Welcome</h2>
+    <h4>You currently have a standard membership. Would you like to upgrade to a premium membership?</h4>
+    <form action="/charges" method="POST">
+      <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+      </script>
+    </form>
+  <% elsif current_user.not_standard? %>
+    <%= link_to "View Profile", user_path(current_user) %> 
   <% else %>
     <h1><%= link_to "Create an Account", new_user_registration_path %><small> or <%= link_to "Sign In", new_user_session_path %></small></h1>
   <% end %>

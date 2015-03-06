@@ -5,23 +5,5 @@
     <%= wiki.user.name %>
   </small>
   <p><%= truncate(wiki.body, length: 60, separator: '.') %></p>
-
-  <%= form_for wiki do |f| %>
-    <% if current_user.not_standard? %>
-        <div class="form-group">
-          <%= f.label :private, class: 'checkbox' do %>
-            <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-sm' do %>
-             <p><%= f.check_box :private %><small>Private</small></p>
-            <% end %>
-          <% end %>
-        </div>
-    <% elsif wiki.public? && current_user.standard? %>
-        <p>Public Wiki</p>
-    <% end %>
-  <% end %>
-
-  <% if policy(wiki).destroy? %>
-    <%= link_to "Edit", edit_wiki_path(wiki.id), class: 'btn btn-success btn-sm' %>
-    <%= link_to "Delete", wiki, method: :delete, class: 'btn btn-warning btn-sm', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
-  <% end %>
+  <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %>
 <% end %>

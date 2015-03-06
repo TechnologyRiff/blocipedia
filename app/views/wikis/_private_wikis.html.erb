@@ -6,10 +6,11 @@
         <%= link_to "#{wiki.title}", wiki %>
         <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
       </h4>
+        <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %> 
     </div>
   </div>
 <% end %>
-<% if current_user && current_user.standard? %>
+<% if current_user.standard? %>
   <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>
   <%= link_to "My Profile", user_path(current_user) %>
 <% end %>

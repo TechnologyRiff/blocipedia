@@ -12,6 +12,10 @@ class Wiki < ActiveRecord::Base
     !private
   end
 
+  def private?
+    private
+  end
+
   def collaborations
     Wiki.where(wiki_id: id)
   end
@@ -39,6 +43,7 @@ class Wiki < ActiveRecord::Base
       .select('COUNT(DISTINCT favorites.id) AS rank')
       .group('wiki.id')
       .order('rank DESC')
+      .take(5)
   end
 
   private

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     put 'role'
   end
   
-  resources :collaborations, only: [:create, :destroy]
+  resources :collaborations, only: [:new, :create, :destroy]
 
 
 

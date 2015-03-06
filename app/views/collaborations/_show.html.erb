@@ -1,0 +1,14 @@
+<div class="btn-group btn-group-xs" role="group" aria-label="collaboration buttons">
+  <%= link_to new_collaboration_path(@wiki), class: 'btn btn-success btn-xs' do %>
+    <span class="has-tooltip" data-toggle="tooltip" title="Add Collaborator">
+      <span class="glyphicon glyphicon-user">
+      </span>
+    </span>
+  <% end %>
+  <%= link_to new_user_invitation_path, class: 'btn btn-primary btn-sm' do %>
+    <span class="has-tooltip" data-toggle="tooltip" title="Invite Collaborator">
+      <span class="glyphicon glyphicon-envelope">
+      </span>
+    </span>
+  <% end %>
+</div>

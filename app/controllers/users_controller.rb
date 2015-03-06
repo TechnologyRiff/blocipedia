@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   
   def index
     @users = User.all
@@ -16,6 +16,8 @@ class UsersController < ApplicationController
       description: "Premium Membership - #{current_user.name}",
       amount: Amount.default
       }
+    @wikis = @user.wikis.where(private: :false)
+    @favorited_wikis = favorited_wikis.where(private: :false) 
   end
 
   def update
