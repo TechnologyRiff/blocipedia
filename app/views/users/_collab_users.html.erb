@@ -1,16 +1,15 @@
 <h1>Collaborating Users</h1>
-  <% current_user.collaborations.each do |person| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to @person %>
-            <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-          </h4>
-          </div>
-      </div>
-    <% end %>
-<% elsif current_user %>
-  <p>You are not collaborating on any wikis.</p> 
-<% else %>
- 
+<% current_user.collaborators.each do |person| %>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to person %>
+        <% person.collaboration_wikis.each do |wiki| %>
+          <%= link_to "#{wiki.title}", wiki %>
+          <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+          <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+        <% end %>
+      </h4>
+    </div>
+  </div>
 <% end %>

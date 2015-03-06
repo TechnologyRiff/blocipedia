@@ -1,14 +1,15 @@
 <h2>Private Wikis</h2>
-<% Wiki.where("user_id = ? AND private = ?", params[:user_id], true).find_each do |wiki| %>
+<% @private_wikis.each do |wiki| %>
   <div class="media">
     <div class="media-body">
       <h4 class="media-heading">
         <%= link_to "#{wiki.title}", wiki %>
         <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
       </h4>
-        <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %> 
+        <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %> 
     </div>
   </div>
+<%# end %>
 <% end %>
 <% if current_user.standard? %>
   <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>

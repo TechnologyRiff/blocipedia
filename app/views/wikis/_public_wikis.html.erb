@@ -2,9 +2,9 @@
 <% Wiki.where(private: false).find_each do |wiki| %>
   <div class="media">
     <h3><%= link_to wiki.title, wiki %></h3>
+    <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
     <small><%= truncate(wiki.body, length: 180, separator: '.') %>
     </small>
-      <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %>
   </div>
 <% end %>
 

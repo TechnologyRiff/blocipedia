@@ -6,7 +6,7 @@
         <%= link_to wiki.title, wiki %>
         <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
       </h4>
-        <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %>
+        <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
     </div>
   </div>
 <% end %>

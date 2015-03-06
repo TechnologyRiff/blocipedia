@@ -8,7 +8,7 @@
         <%= wiki.user.name %>
       </small>
       <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-        <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %>
+        <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
     <% end %>
 <% else %>
   <h2>You have not favorited any wikis</h2>

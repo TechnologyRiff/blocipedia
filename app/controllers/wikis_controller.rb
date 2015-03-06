@@ -4,6 +4,7 @@ class WikisController < ApplicationController
 
   def index
     @wikis = policy_scope(Wiki)
+    @private_wikis = Wiki.private_wikis(current_user)
   end
 
   def auth

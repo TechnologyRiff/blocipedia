@@ -8,6 +8,8 @@ class Wiki < ActiveRecord::Base
 
     validates :title, presence: true
 
+  scope :private_wikis, -> (user) { where("user_id = ? AND private = ?", user, true) }
+
   def public?
     !private
   end
