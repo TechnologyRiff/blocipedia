@@ -27,21 +27,7 @@
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-        <%#= render partial: 'users/collab_users', locals: { wiki: @wiki, collab: @collab } %>
-      </div>
-    </div>
-  </div>
-  <div class="panel panel-info">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-         Top Writers 
-        </a>
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body">
-        <%= render partial: 'users/top_writers', collection: @users %>
+        <%= render partial: 'users/collab_users'  %>
       </div>
     </div>
   </div>

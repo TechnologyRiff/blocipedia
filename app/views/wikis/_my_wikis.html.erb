@@ -1,9 +1,10 @@
 <% current_user.wikis.each do |wiki| %>
   <h4><%= link_to (markdown wiki.title), wiki %></h4>
+  <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+
   <small>
     submitted <%= time_ago_in_words(wiki.created_at) %> ago by
     <%= wiki.user.name %>
   </small>
   <p><%= truncate(wiki.body, length: 60, separator: '.') %></p>
-  <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %>
 <% end %>

@@ -1,9 +1,8 @@
 class CollaborationsController < ApplicationController
 
   def new
-    @users = User.all
-    @persons = User.all
-    @wiki= Wiki.find(params[:wiki_id])
+    @wiki = Wiki.find(params[:wiki_id])
+    @user = User.where(email: params[:email]).take
     if @user 
       collab = Collaboration.new(wiki: @wiki, user: @user)
       if collab.save
@@ -15,6 +14,7 @@ class CollaborationsController < ApplicationController
       # invite by email
       flash[:notice] = "Collaborator was invited."
     end
+    redirect_to request.referer
   end
   
   def create
@@ -31,7 +31,7 @@ class CollaborationsController < ApplicationController
       # invite by email
       flash[:notice] = "Collaborator was invited."
     end
-    redirect_to @wiki
+    redirect_to request.referer
   end
 
   def delete

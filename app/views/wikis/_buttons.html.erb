@@ -15,7 +15,6 @@
         </span>
       <% end %>
     <% end %>
-  <% end %>
   
     <%= render partial: 'favorites/favorite', locals: { wiki: @wiki } %>
   
@@ -40,4 +39,5 @@
     <%= link_to new_wiki_path, class: 'btn btn-success btn-xs' do %>
       <span class="has-tooltip" data-toggle="tooltip" title="New Wiki"><span class="glyphicon glyphicon-pencil"></span></span>
     <% end %>
+  <% end %>
 </div>

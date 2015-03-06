@@ -14,7 +14,3 @@
   <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>
   <%= link_to "My Profile", user_path(current_user) %>
 <% end %>
-<!-- 
-User.where(weekly_subscriber: true).find_each do |user|
-Client.where("orders_count = ? AND locked = ?", params[:orders], false)
- -->

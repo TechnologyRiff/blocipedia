@@ -4,5 +4,7 @@
     <%= hidden_field_tag :wiki_id, @wiki.id %>
     <%= text_field_tag :email %>
     <%= submit_tag "Invite", :name => nil %>
+<% options = options_from_collection_for_select(@users, 'id', 'name') %>
+<%= f.select :all_val,  options %>
   <% end %>
 </div>
