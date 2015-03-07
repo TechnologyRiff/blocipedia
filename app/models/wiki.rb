@@ -28,17 +28,11 @@ class Wiki < ActiveRecord::Base
   end
 
   def self.include?(user)
-    collaborations.wikis.where(wiki_id: id, user_id: user.id).take
+    Wiki.where(user_id: current_user.id) || collaborations.wikis.where(wiki_id: id, user_id: user.id)
   end
   
   def favorited(user)
     favorites.where(wiki_id: id, user_id: user.id).take
-  end
-
-  def favorited_by_user
-    favorites = Favorite.where(wiki_id: id)
-    favorited_by_user = User.where(id: favorites.pluck(:user_id))
-    favorited_by_user
   end
 
   def self.popular

@@ -1,4 +1,4 @@
-<h2>Collaborations</21>
+<h2>Collaborations</h2>
 <% current_user.collaboration_wikis.each do |wiki| %>
   <h4><%= link_to wiki.title, wiki %></h4>
   <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by
