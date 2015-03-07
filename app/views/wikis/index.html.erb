@@ -49,13 +49,13 @@
     <div class="panel-heading" role="tab" id="headingFour">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-         All Public Wikis 
+          My Private Wikis
         </a>
       </h4>
     </div>
     <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
       <div class="panel-body">
-        <%= render partial: 'wikis/public_wikis', locals: { wiki: @wiki } %>
+        <%= render partial: 'wikis/private_wikis', locals: { wiki: @wiki } %>
       </div>
     </div>
   </div>
@@ -63,16 +63,17 @@
     <div class="panel-heading" role="tab" id="headingFive">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          Available Private Wikis 
+          All Public Wikis
         </a>
       </h4>
     </div>
     <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
       <div class="panel-body">
-        <%= render partial: 'wikis/private_wikis', locals: { wiki: @wiki } %>
+        <%= render partial: 'wikis/public_wikis', locals: { wiki: @wiki } %>
+
       </div>
     </div>
   </div>
 </div>
     
-<%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+<%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary', id: 'index-button' %>

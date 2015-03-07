@@ -2,13 +2,14 @@ class Wiki < ActiveRecord::Base
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :collaborations, dependent: :destroy
-  has_many :collab_users, through: :collaborations, source: :user
+  has_many :collab_users, -> { uniq }, through: :collaborations, source: :user
 
   #after_update :send_favorite_emails
 
     validates :title, presence: true
 
   scope :private_wikis, -> (user) { where("user_id = ? AND private = ?", user, true) }
+
 
   def public?
     !private

@@ -18,14 +18,25 @@
         <div class="panel-heading">
         </div>
         <div class="panel-body center-align">
-          <h3><%= link_to "Browse Users", users_path %>
+          <h3><%= link_to "Browse Users", users_path %></h3>
           <h3>&nbsp;</h3>
         </div>
       </div>
     </div>    
   <% else %>
     <div class="row no-margin">
-      <%= render partial: 'wikis/public_wikis', locals: { wiki: @wiki } %>
+      <h2>Public Wikis</h2>
+      <% @public_wikis.each do |wiki| %>
+        <h4><%= link_to wiki.title, wiki %></h4>
+        <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by
+        <% if wiki.user.public %>
+          <%= wiki.user.name  %></small></p>
+        <% else %>
+          Private User</small></p>
+        <% end %>
+        <p><small><%= truncate(wiki.body, length: 180, separator: '.') %></small></p>
+        <hr />
+      <% end %>
     </div>
   <% end %>
 </div>

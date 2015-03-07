@@ -1,15 +1,12 @@
-<h1>Collaborating Users</h1>
-<% current_user.collaborators.each do |person| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= link_to person %>
-        <% person.collaboration_wikis.each do |wiki| %>
-          <%= link_to "#{wiki.title}", wiki %>
-          <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
-          <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-        <% end %>
-      </h4>
-    </div>
-  </div>
+<h2>Collaborating Users</h2>
+<%= "#{current_user.name}" %>
+<% current_user.collab_users.each do |person| %>
+  <h4><%= "#{person.name}" %></h4>
+  <% person.collaboration_wikis.each do |wiki| %>
+    <h5><%= link_to "#{wiki.title}", wiki %><h5>
+    <p><%= truncate(wiki.body, length: 60, separator: '.') %></p>
+    <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+  <% end %>
+  <hr />
 <% end %>
+<%= link_to "New Collaboration", new_collaboration_path, class: "btn btn-success" %> 

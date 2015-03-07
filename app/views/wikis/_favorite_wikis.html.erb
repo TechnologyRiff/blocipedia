@@ -1,14 +1,16 @@
-<h2>My Favorite Wikis</h2>
 <% if current_user.favorited_wikis.present? %>
+  <h2>My Favorite Wikis</h2>
     <% current_user.favorited_wikis.each do |wiki| %>
       <h4><%= link_to markdown wiki.title %></h4>
-      <small>
-        <%# image_tag(@wiki.user.avatar.tiny.url) if @wiki.user.avatar? %>
-        submitted <%= time_ago_in_words(wiki.created_at) %> ago by
-        <%= wiki.user.name %>
-      </small>
+      <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by
+        <% if wiki.user.public %>
+          <%= wiki.user.name  %></small></p>
+        <% else %>
+          Private User</small></p>
+        <% end %>
       <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-        <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+      <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+      <hr />
     <% end %>
 <% else %>
   <h2>You have not favorited any wikis</h2>

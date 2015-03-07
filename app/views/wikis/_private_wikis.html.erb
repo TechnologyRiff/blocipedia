@@ -1,15 +1,10 @@
-<h2>Private Wikis</h2>
+<h2>My Private Wikis</h2>
 <% @private_wikis.each do |wiki| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= link_to "#{wiki.title}", wiki %>
-        <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-      </h4>
-        <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %> 
-    </div>
-  </div>
-<%# end %>
+  <h4><%= link_to "#{wiki.title}", wiki %></h4>
+    <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by <%= wiki.user.name %></small></p>
+    <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
+      <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %> 
+  <hr />
 <% end %>
 <% if current_user.standard? %>
   <p>You are unable to create private wikis. Please upgrade your account to enable this feature.</p>

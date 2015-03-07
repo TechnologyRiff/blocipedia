@@ -1,6 +1,10 @@
-<% @persons.each do |person| %>
-  <% if person.public? %>
-    <%= "Name: #{person.name}" %>
-    <%= render partial: 'users/user_profile', locals: { user: person } %>
+<% @users.each do |person| %>
+    <% if person.public? %>
+    <h4><%= "Name: #{person.name}" %></h4>
+    <h4><%= "Email: #{person.email}" %></h4>
+    <h4><%= "Membership Level: #{person.role.capitalize}" %></h4>
+    <% if person.avatar? %>
+      <h4>Current Avatar: <%= image_tag( person.avatar.profile.url ) %></h4>
+    <% end %>
   <% end %>
 <% end %>

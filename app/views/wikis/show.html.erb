@@ -2,14 +2,13 @@
   <li><%= link_to "Home", :root %></li>
   <li><%= link_to "Wikis", wikis_path %></li>
   <li class="active"><%= "#{@wiki.title}" %></li>
-  <li><%= link_to "Edit", edit_wiki_path(@wiki) %></li>
 </ol>
 <div class="container">
   <div class="row">
     <h1><%= markdown @wiki.title %></h1>
     <small>
       <%# image_tag(@wiki.user.avatar.tiny.url) if @wiki.user.avatar? %>
-      submitted <%= time_ago_in_words(@wiki.created_at) %> ago by
+      Created <%= time_ago_in_words(@wiki.created_at) %> ago by
       <%= @wiki.user.name %>
     </small>
     <p><%= markdown @wiki.body %></p>

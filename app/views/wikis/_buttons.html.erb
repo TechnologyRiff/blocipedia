@@ -1,12 +1,12 @@
 <div class="btn-group btn-group-xs" role="group" aria-label="modify wiki buttons">
   <% if wiki.private? %>
-      <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-xs btn-danger' do %>
+      <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
         <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Public">
           <span class="glyphicon glyphicon-eye-close"></span>
         </span>
       <% end %>
   <% elsif wiki %>
-      <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-xs btn-primary' do %>
+      <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
         <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Private">
           <span class="glyphicon glyphicon-eye-open"></span>
         </span>
@@ -15,25 +15,25 @@
 
   <%= render partial: 'favorites/favorite', locals: { wiki: wiki } %>
 
-  <%= link_to edit_wiki_path(wiki), class: 'btn btn-warning btn-xs' do %>
+  <%= link_to edit_wiki_path(wiki), class: 'btn btn-warning' do %>
     <span class="has-tooltip" data-toggle="tooltip" title="Edit Wiki">
       <span class="glyphicon glyphicon-edit"></span>
     </span>
   <% end %>
 
-  <%= link_to new_collaboration_path(wiki), class: 'btn btn-info btn-xs' do %>
+  <%= link_to new_collaboration_path(wiki), class: 'btn btn-info' do %>
     <span class="has-tooltip" data-toggle="tooltip" title="Add Collaborator">
       <span class="glyphicon glyphicon-user"></span>
     </span>
   <% end %>
 
-  <%= link_to wiki, data: { confirm: 'Are you sure you want to delete this topic?' }, method: :delete, class: 'btn btn-danger btn-xs' do %>
+  <%= link_to wiki, data: { confirm: 'Are you sure you want to delete this topic?' }, method: :delete, class: 'btn btn-danger' do %>
     <span class="has-tooltip" data-toggle="tooltip" title="Delete Wiki">
       <span class="glyphicon glyphicon-trash"></span>
     </span>
   <% end %>
 
-  <%= link_to new_wiki_path, class: 'btn btn-success btn-xs' do %>
+  <%= link_to new_wiki_path, class: 'btn btn-success' do %>
     <span class="has-tooltip" data-toggle="tooltip" title="New Wiki">
       <span class="glyphicon glyphicon-pencil"></span>
     </span>

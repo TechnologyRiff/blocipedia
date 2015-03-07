@@ -7,7 +7,7 @@
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          My Profile
+          <%= "#{current_user.name}'s Profile" %>
         </a>
       </h4>
     </div>
@@ -32,14 +32,14 @@
     </div>
   </div>
   <div class="panel panel-info">
-    <div class="panel-heading" role="tab" id="headingFour">
+    <div class="panel-heading" role="tab" id="headingThree">
       <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           Public User Profiles
         </a>
       </h4>
     </div>
-    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
         <%= render partial: 'users/public_profiles', collection: @users %>
       </div>
@@ -47,14 +47,14 @@
   </div>
   <% if current_user.admin? %>
     <div class="panel panel-info">
-      <div class="panel-heading" role="tab" id="headingFive">
+      <div class="panel-heading" role="tab" id="headingFour">
         <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
             Manage Users
           </a>
         </h4>
       </div>
-      <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
         <div class="panel-body">
           <%= render partial: 'users/manage_users' %>
         </div>

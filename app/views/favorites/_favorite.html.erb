@@ -1,9 +1,9 @@
 <% if favorite = current_user.favorited(wiki) %>
-  <%= link_to favorite_path(wiki_id: wiki.id, id: favorite.id), class: 'btn btn-xs btn-default', method: :delete do %><span class="has-tooltip" data-toggle="tooltip" title="Unfavorite Wiki">
+  <%= link_to favorite_path(wiki_id: wiki.id, id: favorite.id), class: 'btn btn-primary', method: :delete do %><span class="has-tooltip" data-toggle="tooltip" title="Unfavorite Wiki">
     <i class="glyphicon glyphicon-thumbs-down"> </i> </span>
   <% end %>
 <% else %>
-  <%= link_to favorites_path(wiki_id: wiki.id), class: 'btn btn-xs btn-default', method: :post do %><span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Favorite">
+  <%= link_to favorites_path(wiki_id: wiki.id), class: 'btn btn-primary', method: :post do %><span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Favorite">
   <i class="glyphicon glyphicon-thumbs-up"> </i> </span>
   <% end %>
 <% end %>

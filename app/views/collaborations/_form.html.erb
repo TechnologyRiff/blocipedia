@@ -2,9 +2,8 @@
 <div class="form-group">
   <%= form_tag('/collaborations', method: :post) do %>
     <%= hidden_field_tag :wiki_id, @wiki.id %>
+    <%#= select_tag(:user_id, options_for_select(@user_options)) %>
     <%= text_field_tag :email %>
     <%= submit_tag "Invite", :name => nil %>
-<% options = options_from_collection_for_select(@users, 'id', 'name') %>
-<%= f.select :all_val,  options %>
   <% end %>
 </div>

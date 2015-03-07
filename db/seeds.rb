@@ -18,7 +18,7 @@ require 'faker'
     email:    Faker::Internet.email,
     password:   Faker::Lorem.characters(10),
     role:       "premium",
-    public:     'true'
+    public:     true
     )
   user.skip_confirmation!
   user.save!
@@ -30,7 +30,7 @@ end
     email:    Faker::Internet.email,
     password:   Faker::Lorem.characters(10),
     role:       "premium",
-    public:     'false'
+    public:     false
     )
   user.skip_confirmation!
   user.save!
@@ -42,7 +42,7 @@ end
     email:    Faker::Internet.email,
     password:   Faker::Lorem.characters(10),
     role:       "standard",
-    public:     'true'
+    public:     true
     )
   user.skip_confirmation!
   user.save!
@@ -54,7 +54,7 @@ end
     email:    Faker::Internet.email,
     password:   Faker::Lorem.characters(10),
     role:       "standard",
-    public:     'false'
+    public:     false
     )
   user.skip_confirmation!
   user.save!
@@ -92,7 +92,7 @@ premium_user = User.new(
   email:    'premium@example.com',
   password: 'helloworld',
   role:     'premium',
-  public:   'true'
+  public:   true
 
 )
 premium_user.skip_confirmation!
@@ -103,7 +103,7 @@ premium_user.save!
     user:         premium_user,
     title:       Faker::Lorem.sentence,
     body:         Faker::Lorem.paragraph,
-    private:      'true'
+    private:      true
     )
 end
 
@@ -111,7 +111,7 @@ standard_user = User.new(
   name:       'standard user',
   email:       'standard@example.com',
   password:     'helloworld',
-  public:       'true'
+  public:       true
 )
 standard_user.skip_confirmation!
 standard_user.save!

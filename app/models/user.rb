@@ -9,9 +9,8 @@ after_initialize :init
   has_many :favorites, dependent: :destroy
   has_many :favorited_wikis, through: :favorites, source: :wiki
   has_many :collaborations, dependent: :destroy
-  has_many :collaborators, through: :collaborations, source: :user
-  has_many :collaboration_wikis, through: :collaborations, source: :wiki
-
+  has_many :collab_users, -> { uniq }, through: :collaborations, source: :user
+  has_many :collaboration_wikis, -> { uniq }, through: :collaborations, source: :wiki
 
   mount_uploader :avatar, AvatarUploader
 

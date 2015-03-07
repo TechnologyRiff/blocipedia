@@ -1,11 +1,14 @@
 <h2>Public Wikis</h2>
-<% Wiki.where(private: false).find_each do |wiki| %>
-  <div class="media">
-    <h3><%= link_to wiki.title, wiki %></h3>
-    <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
-    <small><%= truncate(wiki.body, length: 180, separator: '.') %>
-    </small>
-  </div>
+<% @public_wikis.each do |wiki| %>
+  <h4><%= link_to wiki.title, wiki %></h4>
+  <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by
+  <% if wiki.user.public %>
+    <%= wiki.user.name  %></small></p>
+  <% else %>
+    Private User</small></p>
+  <% end %>
+  <p><small><%= truncate(wiki.body, length: 180, separator: '.') %></small></p>
+  <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+  <hr />
+<%#= will_paginate @public_wikis %>
 <% end %>
-
-<%#= will_paginate wiki %>

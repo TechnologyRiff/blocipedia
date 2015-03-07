@@ -5,6 +5,8 @@ class WikisController < ApplicationController
   def index
     @wikis = policy_scope(Wiki)
     @private_wikis = Wiki.private_wikis(current_user)
+    @public_wikis = Wiki.where(private: false).paginate(page: params[:page], per_page: 10)
+    
   end
 
   def auth
@@ -37,7 +39,7 @@ class WikisController < ApplicationController
       flash[:notice] = "Wiki was saved."
       redirect_to request.referer
     else 
-      flash[:error] = "There was an error saving the post. Please try again."
+      flash[:error] = "There was an error saving the wiki. Please try again."
       redirect_to :back
     end
   end
@@ -75,6 +77,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private, :image)
+    params.require(:wiki).permit(:title, :body, :private)
   end
 end
