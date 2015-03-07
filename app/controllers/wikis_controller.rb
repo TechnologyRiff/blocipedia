@@ -6,7 +6,11 @@ class WikisController < ApplicationController
     @wikis = policy_scope(Wiki)
     @private_wikis = Wiki.private_wikis(current_user)
     @public_wikis = Wiki.where(private: false).paginate(page: params[:page], per_page: 10)
-    
+    @stripe_btn_data = {
+      key: "#{ Rails.configuration.stripe[:publishable_key] }",
+      description: "Premium Membership - #{current_user.name}",
+      amount: Amount.default
+    }
   end
 
   def auth
@@ -62,17 +66,17 @@ class WikisController < ApplicationController
     authorize @wiki
   end
 
-    def destroy
-      @wiki = Wiki.find(params[:id])
+  def destroy
+    @wiki = Wiki.find(params[:id])
 
-      if @wiki.destroy
-        flash[:alert] = "\"#{@wiki.title}\" was deleted successfully."
-        redirect_to request.referer
-      else
-        flash[:error] = "Wiki couldn't be deleted. Try again later."
-        redirect_to :back
-      end
+    if @wiki.destroy
+      flash[:alert] = "\"#{@wiki.title}\" was deleted successfully."
+      redirect_to request.referer
+    else
+      flash[:error] = "Wiki couldn't be deleted. Try again later."
+      redirect_to :back
     end
+  end
 
   private
 

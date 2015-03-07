@@ -2,13 +2,21 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   
   def index
-    @users = User.all
-    @persons = @users
+    @persons = User.all
+    @person = User.take
+    @public_user = User.where(public: :true)
+    @public_users = @public_user.all
     @user = current_user
+    @collab_users = current_user.collab_users
+    @stripe_btn_data = {
+      key: "#{ Rails.configuration.stripe[:publishable_key] }",
+      description: "Premium Membership - #{current_user.name}",
+      amount: Amount.default
+    }
   end
   
   def show
-    @persons = User.all
+    @public_users = User.all.where(public: :true)
     @user = User.find(params[:id])
     @role = @user.role
      @stripe_btn_data = {
@@ -17,7 +25,7 @@ class UsersController < ApplicationController
       amount: Amount.default
       }
     @wikis = @user.wikis.where(private: :false)
-    @favorited_wikis = favorited_wikis.where(private: :false) 
+    @favorited_wikis = @user.favorited_wikis.where(private: :false) 
   end
 
   def update

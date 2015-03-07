@@ -49,10 +49,6 @@ after_initialize :init
     self.save
   end
 
-  def collaborations
-    Collaboration.where(user_id: id)
-  end
-
   def collab_wiki
     collaborations.wikis
   end

@@ -1,10 +1,31 @@
-<% @users.each do |person| %>
-    <% if person.public? %>
-    <h4><%= "Name: #{person.name}" %></h4>
-    <h4><%= "Email: #{person.email}" %></h4>
-    <h4><%= "Membership Level: #{person.role.capitalize}" %></h4>
-    <% if person.avatar? %>
-      <h4>Current Avatar: <%= image_tag( person.avatar.profile.url ) %></h4>
-    <% end %>
+<% @persons.each do |person| %>
+  <% if person.avatar? %>
+    <h4>Current Avatar: <%= image_tag( person.avatar.profile.url ) %></h4>
   <% end %>
+  <h4><%= "Name: #{person.name}" %></h4>
+  <h4>Email: <%= mail_to "#{person.email}" %></h4>
+  <h4><%= "Membership Level: #{person.role.capitalize}" %></h4>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">
+  <%= "#{person.name}'s Wikis" %>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= "#{person.name}'s Wikis" %></h4>
+      </div>
+      <div class="modal-body">
+       <%= render partial: 'wikis/my_wikis', locals: { user: person } %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <hr />
 <% end %>

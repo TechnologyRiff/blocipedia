@@ -25,7 +25,7 @@ class WikiPolicy < ApplicationPolicy
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          if wiki.public? #|| wiki.include?(user)
+          if wiki.public? || wiki.user == user || wiki.collab_users.include?(user)
             wikis << wiki
           end
         end
@@ -33,7 +33,7 @@ class WikiPolicy < ApplicationPolicy
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          if wiki.public? #|| wiki.include?(user)
+          if wiki.public? || wiki.collab_users.include?(user)
             wikis << wiki
           end
         end

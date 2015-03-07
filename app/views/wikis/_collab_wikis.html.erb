@@ -2,8 +2,19 @@
 <% current_user.collaboration_wikis.each do |wiki| %>
   <h4><%= link_to wiki.title, wiki %></h4>
   <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by
-    <%= wiki.user.name  %></small></p>
+    <%= wiki.user.name  %>. Last updated <%= time_ago_in_words(wiki.updated_at) %> ago.</small></p> 
   <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
   <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
   <hr />
+<% end %>
+<% unless current_user.collaboration_wikis %> 
+  <p>You are not collaborating on any wikis.</p>
+<% end %>
+<% if current_user.standard? %>
+  <p>You may be invited to collaborate on a private wiki by a Premium User. In order to create private wikis and invite collaborators, you must have a Premium account.</p>
+  <p>Would you like to upgrade your account?</p> 
+  <form action="/charges" method="POST">
+    <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
+    </script>
+  </form>
 <% end %>

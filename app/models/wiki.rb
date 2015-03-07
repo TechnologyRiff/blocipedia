@@ -18,18 +18,6 @@ class Wiki < ActiveRecord::Base
   def private?
     private
   end
-
-  def collaborations
-    Wiki.where(wiki_id: id)
-  end
-
-  def collab_user
-    collaborations.users
-  end
-
-  def self.include?(user)
-    Wiki.where(user_id: current_user.id) || collaborations.wikis.where(wiki_id: id, user_id: user.id)
-  end
   
   def favorited(user)
     favorites.where(wiki_id: id, user_id: user.id).take
