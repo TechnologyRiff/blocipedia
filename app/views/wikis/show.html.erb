@@ -13,9 +13,11 @@
     </small>
     <p><%= markdown @wiki.body %></p>
       <%= render partial: 'wikis/buttons', locals: { wiki: @wiki } %>
+    
     <% if current_user.not_standard? && @wiki.private? %>
-      <%= render partial: 'collaborations/form', locals: { wiki: @wiki } %>
       <%= render partial: 'collaborations/show', locals: { wiki: @wiki } %>
+      <%= render partial: 'collaborations/form', locals: { wiki: @wiki } %>
+      
     <% end %>
   </div>
 </div>

@@ -1,10 +1,41 @@
-<h2>Collaborations</h2>
 <% current_user.collaboration_wikis.each do |wiki| %>
   <h4><%= link_to wiki.title, wiki %></h4>
   <p><small>Created <%= time_ago_in_words(wiki.created_at) %> ago by
     <%= wiki.user.name  %>. Last updated <%= time_ago_in_words(wiki.updated_at) %> ago.</small></p> 
   <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
-  <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>
+  <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %><br />
+  
+  <!-- Button trigger modal -->
+    <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">
+      Collaborators
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">
+            <% wiki.collaborating_users.each do |person| %>
+            <%= "Collaborations with #{person.name}" %></h4>
+          </div>
+          <div class="modal-body">
+          <%= "#{person.name}" %>
+          <%= "#{person.email}" %>
+           <%#= render partial: 'users/person_profile', locals: { user: person } %>
+          
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%# end %>
+
+
   <hr />
 <% end %>
 <% unless current_user.collaboration_wikis %> 
