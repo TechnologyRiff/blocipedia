@@ -10,6 +10,9 @@ class Wiki < ActiveRecord::Base
 
   scope :private_wikis, -> (user) { where("user_id = ? AND private = ?", user, true) }
 
+  # def self.collab_users
+  #   User.joins(:collaborations).where(wiki_id: id)
+  # end
 
   def public?
     !private
@@ -23,18 +26,10 @@ class Wiki < ActiveRecord::Base
     favorites.where(wiki_id: id, user_id: user.id).take
   end
 
-  def self.popular
-    self.select('wikis.*')
-      .select('COUNT(DISTINCT favorites.id) AS rank')
-      .group('wiki.id')
-      .order('rank DESC')
-      .take(5)
-  end
-
   private
 
   def send_favorite_emails
-    wiki.favorites.each do |favorite|
+    favorites.each do |favorite|
       FavoriteMailer.wiki_updated(favorite.user, wiki, self).deliver
     end
   end

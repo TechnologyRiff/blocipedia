@@ -79,6 +79,10 @@ class WikisController < ApplicationController
 
   private
 
+  def scope
+    scope :change_private, -> (user) { user ? all : where(public: true) }
+  end 
+
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
   end

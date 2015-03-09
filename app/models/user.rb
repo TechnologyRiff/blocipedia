@@ -9,10 +9,14 @@ after_initialize :init
   has_many :favorites, dependent: :destroy
   has_many :favorited_wikis, through: :favorites, source: :wiki
   has_many :collaborations, dependent: :destroy
-  has_many :collab_users, -> { uniq }, through: :collaborations, source: :user
+  #has_many :collab_users, -> { uniq }, through: :collaborations, source: :user
   has_many :collaboration_wikis, -> { uniq }, through: :collaborations, source: :wiki
 
   mount_uploader :avatar, AvatarUploader
+
+  # def collab_users
+  #   User.joins(:collaborations).where(user_id: id)
+  # end
 
   def init
     self.role ||= 'standard' if self.has_attribute? :role
@@ -36,6 +40,7 @@ after_initialize :init
 
   def downgrade
     self.role = 'standard'
+    Wiki.where(user_id: id, private: true).destroy_all
     self.save
   end
 
@@ -49,38 +54,16 @@ after_initialize :init
     self.save
   end
 
-  def collab_wiki
-    collaborations.wikis
-  end
-
   def public?
     public == 'true'
-  end
-
-  def follow(person)
-    follow.where(user_id: person.id).take
   end
   
   def favorited(wiki)
     favorites.where(user_id: id, wiki_id: wiki.id).take
   end
 
-  def self.most_followed
-    self.select('users.*')
-      .select('COUNT(DISTINCT follow.id) AS rank')
-      .group('users.id')
-      .order('rank DESC')
-  end
-
   def self.search(search)
     where('name like ?', "%#{search}%")
-  end
-
-  def self.top_writers
-    self.select('users.*')
-      .select('COUNT(DISTINCT wikis.id) AS rank')
-      .group('users.id')
-      .order('rank DESC')
   end
 
 end
