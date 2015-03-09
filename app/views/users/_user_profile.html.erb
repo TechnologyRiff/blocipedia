@@ -1,10 +1,8 @@
 <div class="row no-margin">
-  <% if @user.public? || @user == current_user %>
-    <h4><%= "Name: #{@user.name}" %></h4>
-    <h4><%= "Email: #{@user.email}" %></h4>
-    <h4><%= "Membership Level: #{@user.role.capitalize}" %></h4>
-    <% if current_user.avatar? %>
-      <h4>Current Avatar: <%= image_tag( current_user.avatar.profile.url ) %></h4>
-    <% end %>
+  <% if @user.avatar? %>
+      <h4>Current Avatar: <%= image_tag( @user.avatar.profile.url ) %></h4>
   <% end %>
+  <h4><%= "Name: #{@user.name}" %></h4>
+  <h4><%= "Email: #{@user.email}" %></h4>
+  <h4><%= "Membership Level: #{@user.role.capitalize}" %></h4>
 </div>

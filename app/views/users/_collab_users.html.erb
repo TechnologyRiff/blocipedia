@@ -1,7 +1,7 @@
 <h2>Collaborating Users</h2>
 <% @collab_users.each do |person| %>
-  <h4><%= "#{person.name}" %></h4>
-  <% person.collaboration_wikis.each do |wiki| %>
+  <% @collaboration_wikis.each do |wiki| %>
+    <%= "#{person.name}" %>
     
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-info btn-md btn-fixed-width" data-toggle="modal" data-target="#myModal">
@@ -17,7 +17,7 @@
             <h4 class="modal-title" id="myModalLabel"><%= "Collaborations with #{person.name}" %></h4>
           </div>
           <div class="modal-body">
-           <%= render partial: 'wikis/my_wikis', locals: { wiki: wiki } %>
+           <%= render partial: 'wikis/my_wikis', locals: { wiki: wiki, user: person } %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
