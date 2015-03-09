@@ -7,7 +7,6 @@
   <div class="row">
     <h1><%= markdown @wiki.title %></h1>
     <small>
-      <%# image_tag(@wiki.user.avatar.tiny.url) if @wiki.user.avatar? %>
       Created <%= time_ago_in_words(@wiki.created_at) %> ago by
       <%= @wiki.user.name %>
     </small>

@@ -1,11 +1,10 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
-  require 'will_paginate/array'
 
   def index
     @wikis = policy_scope(Wiki)
     @private_wikis = Wiki.private_wikis(current_user)
-    @public_wikis = Wiki.where(private: false).paginate(page: params[:page], per_page: 10)
+    @public_wikis = Wiki.where(private: false)
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
       description: "Premium Membership - #{current_user.name}",
