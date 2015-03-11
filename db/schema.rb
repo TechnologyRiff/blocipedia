@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303214007) do
+ActiveRecord::Schema.define(version: 20150311220929) do
 
   create_table "collaborations", force: true do |t|
     t.integer  "user_id"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20150303214007) do
     t.integer  "invitations_count",      default: 0
     t.boolean  "email_favorites",        default: true
     t.boolean  "public",                 default: false
+    t.boolean  "email_collab",           default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
