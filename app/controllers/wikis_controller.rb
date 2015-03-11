@@ -14,7 +14,7 @@ class WikisController < ApplicationController
 
   def auth
     @wiki = Wiki.find(params[:id])
-    if @wiki.private?
+    if @wiki.private? 
       @wiki.private = false
     else
       @wiki.private = true
@@ -78,10 +78,6 @@ class WikisController < ApplicationController
   end
 
   private
-
-  def scope
-    scope :change_private, -> (user) { user ? all : where(public: true) }
-  end 
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)

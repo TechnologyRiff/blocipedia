@@ -5,12 +5,15 @@
           <span class="glyphicon glyphicon-eye-close"></span>
         </span>
       <% end %>
-  <% elsif wiki && (current_user.role == 'admin' || current_user.role == 'premium') %>
+  <% elsif wiki.public? && (current_user.role == 'admin' || (current_user.role == 'premium' && current_user == wiki.user)) %>
       <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
         <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Private">
           <span class="glyphicon glyphicon-eye-open"></span>
         </span>
       <% end %>
+  <% elsif wiki.public? %>
+    <%= link_to " ", class: "btn-btn-default" %><span class="has-tooltip" data-toggle="tooltip" title="Wiki is Public">&nbsp;
+          <span class="glyphicon glyphicon-eye-open"></span></span>
   <% end %>
 
   <%= render partial: 'favorites/favorite', locals: { wiki: wiki } %>

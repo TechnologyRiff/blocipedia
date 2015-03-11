@@ -1,17 +1,18 @@
 <ol class="breadcrumb navbar-fixed-top" >
   <li><%= link_to "Home", :root %></li>
   <li><%= link_to "Users", users_path %></li>
-  <li class="active"><%= current_user.name || current_user.email %></a></li>
+  <li class="active"><%= @user.name || @user.email %></a></li>
 </ol>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-4 no-padding">
+    <div class="col-md-6 no-padding">
     <h1>User Profile</h1>
       <%= render partial: 'users/user_profile' %><br />
-      <% if current_user.premium? %>
-        <%= link_to "Downgrade Membership", user_downgrade_path(current_user), { data: { confirm: "Are you sure you want to become a standard user? All private wikis will be deleted. Change any wikis you wish to save to public before continuing." }, method: :post, class: "btn btn-default btn-fixed-width" } %>
-      <% elsif current_user.standard? %>
+      <%= link_to "Edit Profile", edit_user_registration_path(@user), class: 'btn btn-info btn-fixed-width' %>
+      <% if @user.premium? %>
+        <%= link_to "Downgrade Membership", user_downgrade_path(@user), { data: { confirm: "Are you sure you want to become a standard user? All private wikis will be deleted. Change any wikis you wish to save to public before continuing." }, method: :post, class: "btn btn-default btn-fixed-width" } %>
+      <% elsif @user.standard? %>
         <h4>Would you like to upgrade to a premium membership?</h4>
         <form action="/charges" method="POST">
           <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" >
@@ -20,9 +21,6 @@
       <% end %>
     </div>
     <div class="col-md-6 no-padding">
-    <%= render partial: 'users/edit' %>
-    </div>
-    <div class="col-md-2 no-padding">
     </div>
   </div>
 </div>

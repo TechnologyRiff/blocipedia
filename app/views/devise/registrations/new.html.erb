@@ -30,6 +30,12 @@
         </div>
 
         <div class="form-group">
+         <p><%= f.label :public, class: 'checkbox' do %>
+            <%= f.check_box :public %> Public Profile
+          <% end %></p>
+        </div>
+
+        <div class="form-group">
           <%= f.submit "Sign up as Standard user", class: 'btn btn-success' %>
         </div>
 
