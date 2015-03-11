@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @public_user = User.where(public: :true)
     @public_users = @public_user.all
     @user = current_user
-    @collab_users = current_user.collab_users
+    #@collab_users = current_user.collab_users
     @collaboration_wikis = current_user.collaboration_wikis
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
