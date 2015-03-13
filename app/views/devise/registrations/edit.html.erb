@@ -10,9 +10,7 @@
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
-    <% end %>
 
-    <%= form_for(current_user) do |f| %>
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control', placeholder: "Enter name", autofocus: true %>
@@ -64,7 +62,7 @@
 
       <div class="form-group">
         <p><%= f.label :email_favorites, class: 'checkbox' do %>
-          <%= f.check_box :email_favorites %> Email me when Favorite Wikis are updated.
+          <%= f.check_box :email_favorites %> Email me when my Favorite Wikis are updated.
         <% end %></p>
       </div>
 
@@ -76,7 +74,7 @@
       <div class="form-group">
         <%= f.submit "Update", class: 'btn btn-success' %> 
         <% if current_user.role == 'standard' %>
-          <%= f.submit "Ugrade", class: 'btn btn-primary' %>
+          <%= f.submit "Upgrade", class: 'btn btn-primary' %>
         <% end %>
       </div>
       
