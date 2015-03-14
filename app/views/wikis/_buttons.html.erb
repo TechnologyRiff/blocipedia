@@ -1,19 +1,24 @@
 <div class="btn-group btn-group-xs" role="group" aria-label="modify wiki buttons">
+  
   <% if wiki.private? && (current_user.role == 'admin' || current_user.role == 'premium') %>
-      <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
-        <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Public">
-          <span class="glyphicon glyphicon-eye-close"></span>
-        </span>
-      <% end %>
+    <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
+      <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Public">
+        <span class="glyphicon glyphicon-eye-close"></span>
+      </span>
+    <% end %>
+  
   <% elsif wiki.public? && (current_user.role == 'admin' || (current_user.role == 'premium' && current_user == wiki.user)) %>
-      <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
-        <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Private">
-          <span class="glyphicon glyphicon-eye-open"></span>
-        </span>
-      <% end %>
+    <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
+      <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Private">
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </span>
+    <% end %>
+  
   <% elsif wiki.public? %>
-    <%= link_to " ", class: "btn-btn-default" %><span class="has-tooltip" data-toggle="tooltip" title="Wiki is Public">&nbsp;
-          <span class="glyphicon glyphicon-eye-open"></span></span>
+    <%= link_to " ", class: "btn-btn-default" %>
+      <span class="has-tooltip" data-toggle="tooltip" title="Wiki is Public">&nbsp;
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </span>
   <% end %>
 
   <%= render partial: 'favorites/favorite', locals: { wiki: wiki } %>

@@ -1,12 +1,22 @@
-<p>Change user's role?</p>
 <div class="form-group">
-  <%= form_tag('/role', method: :post) do %>
-    <%= hidden_field_tag :person_id %>
+  <% @persons.each do |person| %>
+    <p><%= person.role.capitalize %>: 
+       <%= person.name %>
+    </p>
+
+    <%= form_for(person, {url: {action: :role, method: :put}, html: {class: 'form-control', role: "form"}}) do |f| %>
+    <%#= form_for(person {url: {user_role_path, method: :put}, html: {class: "btn btn-primary btn-sm", role: "form"} }) do |f| %>
+      <%= hidden_field_tag :person_id %>
+    <%#= link_to user_role_path(person), method: :put, class: 'btn btn-default' do %>
+  
+      <%= f.radio_button(:role, "admin") %>
+      <%= f.label(:role_admin, " Administrator ") %>
+      <%= f.radio_button(:role, "premium") %>
+      <%= f.label(:role_premium, " Premium ") %>
+      <%= f.radio_button(:role, "standard") %>
+      <%= f.label(:role_standard, " Standard") %>
+      <%= f.submit "Update" %>
+    <% end %>
   <% end %>
-  <%= radio_button_tag(:role, "Admin") %>
-  <%= label_tag(:role_admin, " Administrator     ") %>
-  <%= radio_button_tag(:role, "Premium") %>
-  <%= label_tag(:role_premium, " Premium     ") %>
-  <%= radio_button_tag(:role, "Standard") %>
-  <%= label_tag(:role_standard, " Standard") %>
 </div>
+

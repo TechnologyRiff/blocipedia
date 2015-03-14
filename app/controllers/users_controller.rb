@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @public_users = User.all.where(public: :true)
     @user = User.find(params[:id])
     @role = @user.role
-     @stripe_btn_data = {
+    @stripe_btn_data = {
       key: Rails.configuration.stripe[:publishable_key],
       description: "Premium Membership - #{current_user.name}",
       amount: Amount.default
@@ -46,14 +46,16 @@ class UsersController < ApplicationController
 
   def role
     @person = User.find(params[:user_id])
-    @person.role.save
+    @person.role = user_params[:role]
+    @person.save
     redirect_to request.referer
   end
+
 
 private
 
   def user_params
-    params.require(:user).permit(:name, :avatar)
+    params.require(:user).permit(:name, :role, :email_favorites, :email_collab, :avatar)
   end
  
   def scope
