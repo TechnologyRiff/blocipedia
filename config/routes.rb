@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do 
     post 'downgrade'
     put 'role'
+    patch 'role'
   end
   
   resources :collaborations, only: [:new, :create, :destroy]
