@@ -15,11 +15,11 @@
     <% end %>
   
   <% elsif wiki.public? %>
-    <%= link_to " ", class: "btn-btn-default" do %>
-      <span class="has-tooltip" data-toggle="tooltip" title="Wiki is Public">&nbsp;
+    <span class="btn btn-default disabled">
+      <span class="has-tooltip" data-toggle="tooltip" title="Wiki is Public">
         <span class="glyphicon glyphicon-eye-open"></span>
       </span>
-    <% end %>
+    </span>
   <% end %>
 
   <%= render partial: 'favorites/favorite', locals: { wiki: wiki } %>
