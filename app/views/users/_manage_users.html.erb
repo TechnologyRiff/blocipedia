@@ -1,10 +1,23 @@
 <h2>Manage User's Role</h2>
 
-  <%= render partial: 'users/role', locals: { user: @person } %>
+ <div class="form-group">
+  <% @persons.each do |person| %>
+    <p><%= person.role.capitalize %>: 
+       <%= person.name %>
+    </p>
 
-  <%#= search_field(:user, :name) %>
-  <%#= form_tag users_path, method: :get do %>
-      <%#= text_field_tag :search, params[:search] %>
-      <%#= submit_tag "Search", :name => nil %>
-  <%# end %>
-     
+    <%= form_for(person, url: {action: :role, user_id: person.id, method: :put}, html: { role: "form" }) do |f| %>
+      <%= hidden_field_tag :person_id %>
+  
+      <%= f.radio_button(:role, "admin") %>
+      <%= f.label(:role_admin, " Administrator ") %>
+      <%= f.radio_button(:role, "premium") %>
+      <%= f.label(:role_premium, " Premium ") %>
+      <%= f.radio_button(:role, "standard") %>
+      <%= f.label(:role_standard, " Standard") %>
+    
+      <%= f.submit "update", class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  <% end %>
+</div>
+
