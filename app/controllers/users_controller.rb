@@ -4,9 +4,8 @@ class UsersController < ApplicationController
   def index
     @persons = User.all
     @person = User.take
-    @public_user = User.where(public: :true)
-    @public_users = @public_user.all
-    @user = current_user
+    @public_users = User.where(public: true).where.not(id: current_user.id)
+    #@user = current_user
     #@collab_users = current_user.collab_users
     @collaboration_wikis = current_user.collaboration_wikis
     @stripe_btn_data = {
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @public_users = User.all.where(public: :true)
+    @public_users = User.all.where(public: true)
     @user = User.find(params[:id])
     @role = @user.role
     @stripe_btn_data = {
@@ -25,8 +24,8 @@ class UsersController < ApplicationController
       description: "Premium Membership - #{current_user.name}",
       amount: Amount.default
       }
-    @wikis = @user.wikis.where(private: :false)
-    @favorited_wikis = @user.favorited_wikis.where(private: :false) 
+    @wikis = @user.wikis.where(private: false)
+    @favorited_wikis = @user.favorited_wikis.where(private: false) 
   end
 
   def update

@@ -1,4 +1,4 @@
-<% current_user.wikis.each do |wiki| %>
+<% user.wikis.each do |wiki| %>
   <h4><%= link_to (markdown wiki.title), wiki %></h4>
   <p><%= truncate(wiki.body, length: 200, separator: '.') %></p>
   <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %>

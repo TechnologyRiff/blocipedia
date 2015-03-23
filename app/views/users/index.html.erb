@@ -13,7 +13,7 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-        <%= render partial: 'users/user_profile' %>
+        <%= render partial: 'users/user_profile', locals: {user: current_user} %>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
       <div class="panel-body">
-        <%= render partial: 'users/user_profile', collection: @public_users %>
+        <%= render partial: 'users/user_profile', collection: @public_users, as: :user %>
       </div>
     </div>
   </div>
