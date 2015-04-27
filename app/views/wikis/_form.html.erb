@@ -7,8 +7,7 @@
 
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.hidden_field :body, id: "body" %>
-    <div id="epiceditor"></div>
+    <%= f.text_area :body, rows: 14, class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -20,15 +19,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success', onclick: "prep()" %>
+    <%= f.submit "Save", class: 'btn btn-success' %>
   </div>
-
-  <script>
-    var editor = new EpicEditor().load();
-    editor.getElement('editor').body.innerHTML = '<%= escape_javascript(@wiki.body) %>';
-    function prep() {
-      $("#body")[0].value = (edit.getElement('editor').body.innerHTML);
-    }
-  </script>
-  
 <% end %>
