@@ -10,9 +10,9 @@ class Wiki < ActiveRecord::Base
 
   scope :private_wikis, -> (user) { where("user_id = ? AND private = ?", user, true) }
 
-  # def self.collab_users
-  #   User.joins(:collaborations).where(wiki_id: id)
-  # end
+  def self.collab_users
+    User.joins(:collaborations).where(wiki_id: id)
+  end
 
   def public?
     !private

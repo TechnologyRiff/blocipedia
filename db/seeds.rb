@@ -131,9 +131,9 @@ end
 )
 end
 
-20.times do
+300.times do
   Collaboration.create!(
-    user:   premium_user,
+    user:   users.sample,
     wiki:   wikis.sample
     )
 end

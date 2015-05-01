@@ -9,14 +9,14 @@ after_initialize :init
   has_many :favorites, dependent: :destroy
   has_many :favorited_wikis, through: :favorites, source: :wiki
   has_many :collaborations, dependent: :destroy
-  #has_many :collab_users, -> { uniq }, through: :collaborations, source: :user
   has_many :collaboration_wikis, -> { uniq }, through: :collaborations, source: :wiki
+#  has_many :collab_users, -> { uniq }, through: :collaborations, source: :user
 
   mount_uploader :avatar, AvatarUploader
 
-  # def collab_users
-  #   User.joins(:collaborations).where(user_id: id)
-  # end
+  def collab_users
+     User.joins(:collaborations).where(wiki_id: self.collaboration_wikis.id)
+  end
 
   def init
     self.role ||= 'standard' if self.has_attribute? :role

@@ -3,21 +3,21 @@
   <% if wiki.private? && (current_user.role == 'admin' || current_user.role == 'premium') %>
     <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
       <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Public">
-        <span class="glyphicon glyphicon-eye-close"></span>
+        <span class="glyphicon glyphicon-ban-circle"></span>
       </span>
     <% end %>
   
   <% elsif wiki.public? && (current_user.role == 'admin' || (current_user.role == 'premium' && current_user == wiki.user)) %>
     <%= link_to auth_wiki_path(wiki), method: :put, class: 'btn btn-default' do %>
       <span class="has-tooltip" data-toggle="tooltip" title="Make Wiki Private">
-        <span class="glyphicon glyphicon-eye-open"></span>
+        <span class="glyphicon glyphicon-bullhorn"></span>
       </span>
     <% end %>
   
   <% elsif wiki.public? %>
     <span class="btn btn-default disabled">
       <span class="has-tooltip" data-toggle="tooltip" title="Wiki is Public">
-        <span class="glyphicon glyphicon-eye-open"></span>
+        <span class="glyphicon glyphicon-bullhorn"></span>
       </span>
     </span>
   <% end %>
@@ -30,7 +30,7 @@
     </span>
   <% end %>
 
-  <%= link_to new_collaboration_path(wiki), class: 'btn btn-info' do %>
+  <%= link_to new_collaboration_path(wiki_id: wiki.id), class: 'btn btn-info' do %>
     <span class="has-tooltip" data-toggle="tooltip" title="Add Collaborator">
       <span class="glyphicon glyphicon-user"></span>
     </span>

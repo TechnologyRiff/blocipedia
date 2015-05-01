@@ -4,9 +4,53 @@
     <%= wiki.user.name  %>. Last updated <%= time_ago_in_words(wiki.updated_at) %> ago.</small></p> 
   <p><%= truncate(wiki.body, length: 180, separator: '.') %></p>
   <%= render partial: 'wikis/buttons', locals: { wiki: wiki } %><br />
+  <% wiki.collab_users.each do |person| %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-info btn-min-width btn-md" data-toggle="modal" data-target="#myModal">
+    <%= "#{person.name}" %>
+  </button>
+  <br />
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">User Profile</h4>
+        </div>
+        <div class="modal-body">
+          <h4><%= "Name: #{person.name}" %></h4>
+          <h4><%= "Email: #{person.email}" %></h4>
+          <h4><%= "Membership Level: #{person.role.capitalize}" %></h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<% end %>
+
+
+<div class="btn-group btn-group-xs" role="group" aria-label="collaboration buttons">
+  <%= link_to new_collaboration_path(@wiki), class: 'btn btn-success btn-xs' do %>
+    <span class="has-tooltip" data-toggle="tooltip" title="Add Collaborator">
+      <span class="glyphicon glyphicon-user">
+      </span>
+    </span>
+  <% end %>
+  <%= link_to new_user_invitation_path, class: 'btn btn-primary btn-sm' do %>
+    <span class="has-tooltip" data-toggle="tooltip" title="Invite Collaborator">
+      <span class="glyphicon glyphicon-envelope">
+      </span>
+    </span>
+  <% end %>
+</div>
   
   <!-- Button trigger modal -->
-    <button type="button" class="btn btn-info btn-md btn-fixed-width" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-info btn-md btn-min-width" data-toggle="modal" data-target="#myModal">
       Collaborators
     </button>
 
@@ -33,11 +77,10 @@
         </div>
       </div>
     </div>
-  <%# end %>
+  <% end %>
 
 
   <hr />
-<% end %>
 <% unless current_user.collaboration_wikis %> 
   <p>You are not collaborating on any wikis.</p>
 <% end %>

@@ -1,5 +1,5 @@
 <ol class="breadcrumb navbar-fixed-top">
-  <li><% link_to :root %>Home</a></li>
+  <li><%= link_to "Home", root_path %></li>
   <li><%= link_to "Wikis", wikis_path %></li>
   <li><%= link_to "#{@wiki.title}", wiki_path(@wiki) %></li>
   <li class="active">Edit</li>
